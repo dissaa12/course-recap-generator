@@ -1,0 +1,453 @@
+{
+  "schema_version": "1",
+  "source": {
+    "identifier": "AAPLecture4_Inference_Basics",
+    "kind": "slide_deck",
+    "total_slides": 28,
+    "processed_slides": 28,
+    "unavailable_slides": []
+  },
+  "noise_handling": {
+    "ignored_patterns": ["deboistech"],
+    "notes": "The extraction manifest records the 'deboistech' background watermark and its per-line filler 'd' being stripped before the per-slide files were written (cleaning: 924 watermark lines, 28 footers, 28 markers, 0 duplicate lines collapsed, 0 fused headings split), so no watermark run survives in the slide text; 'deboistech' is listed here for the record. No further noise removal was needed: lines are plain text, bullet glyphs are absent, and the interpunct '·' in the part headings, curly apostrophes (U+2019) and unmapped private-use ligature codepoints (U+E007, U+E009) are preserved exactly as extracted."
+  },
+  "topics": [
+    {
+      "topic": "WHY IT MATTERS",
+      "subtopic": "Production stakes",
+      "key_concept": "Why a production engineer cares",
+      "explanation": "Calling a model is the easy part; in production you own what happens around it — speed, cost, capacity and reliability — and each idea in the session maps to a decision you will be asked to make.",
+      "examples": [],
+      "important_terms": ["speed", "cost", "capacity", "reliability"],
+      "revision_points": ["Each idea today maps to a decision you will be asked to make."],
+      "source_reference": {
+        "slide": 3,
+        "section": "WHY IT MATTERS",
+        "quote": "In production you own what happens around it: speed, cost, capacity and reliability"
+      },
+      "availability": "available",
+      "confidence": "high"
+    },
+    {
+      "topic": "PART 1 · DEFINITIONS, DEEPENED",
+      "subtopic": "Quick recap from Day 1",
+      "key_concept": "Latency and throughput",
+      "explanation": "The one-line refresher of the five Day 1 words defines latency as how fast one request starts and throughput as how many are served at once.",
+      "examples": [],
+      "important_terms": ["Latency", "throughput", "TTFT"],
+      "revision_points": [],
+      "source_reference": {
+        "slide": 4,
+        "section": "PART 1 · DEFINITIONS, DEEPENED",
+        "quote": "Latency is how fast one request starts; throughput is how many we serve at once."
+      },
+      "availability": "available",
+      "confidence": "high"
+    },
+    {
+      "topic": "PART 1 · DEFINITIONS, DEEPENED",
+      "subtopic": "New terms for today",
+      "key_concept": "Batching",
+      "explanation": "Named as one of four ideas that decide real-world speed: batching processes requests together.",
+      "examples": [],
+      "important_terms": ["batching", "real-world speed"],
+      "revision_points": [],
+      "source_reference": {
+        "slide": 5,
+        "section": "PART 1 · DEFINITIONS, DEEPENED",
+        "quote": "batching (process requests together)"
+      },
+      "availability": "available",
+      "confidence": "high"
+    },
+    {
+      "topic": "PART 1 · DEFINITIONS, DEEPENED",
+      "subtopic": "New terms for today",
+      "key_concept": "Concurrency",
+      "explanation": "Named as one of four ideas that decide real-world speed: concurrency is many requests in flight at once.",
+      "examples": [],
+      "important_terms": ["concurrency"],
+      "revision_points": [],
+      "source_reference": {
+        "slide": 5,
+        "section": "PART 1 · DEFINITIONS, DEEPENED",
+        "quote": "concurrency (many in flight at once)"
+      },
+      "availability": "available",
+      "confidence": "high"
+    },
+    {
+      "topic": "PART 1 · DEFINITIONS, DEEPENED",
+      "subtopic": "New terms for today",
+      "key_concept": "Queueing",
+      "explanation": "Named as one of four ideas that decide real-world speed: queueing is waiting for a free slot.",
+      "examples": [],
+      "important_terms": ["queueing"],
+      "revision_points": [],
+      "source_reference": {
+        "slide": 5,
+        "section": "PART 1 · DEFINITIONS, DEEPENED",
+        "quote": "queueing (waiting for a free slot)"
+      },
+      "availability": "available",
+      "confidence": "high"
+    },
+    {
+      "topic": "PART 1 · DEFINITIONS, DEEPENED",
+      "subtopic": "New terms for today",
+      "key_concept": "Cold starts",
+      "explanation": "Named as one of four ideas that decide real-world speed: a cold start is the delay before a sleeping model can answer.",
+      "examples": [],
+      "important_terms": ["cold starts"],
+      "revision_points": [],
+      "source_reference": {
+        "slide": 5,
+        "section": "PART 1 · DEFINITIONS, DEEPENED",
+        "quote": "cold starts (the delay before a sleeping model can answer)"
+      },
+      "availability": "available",
+      "confidence": "high"
+    },
+    {
+      "topic": "PART 2 · THE INFERENCE PIPELINE",
+      "subtopic": "A request’s actual journey",
+      "key_concept": "A request’s actual journey",
+      "explanation": "Every request passes the same six stages: it arrives, may wait in a queue, has its prompt processed (prefill), generates tokens one by one (decode), shares the GPU with others (batching), and streams back.",
+      "examples": [],
+      "important_terms": ["prefill", "decode", "batching"],
+      "revision_points": [],
+      "source_reference": {
+        "slide": 6,
+        "section": "PART 2 · THE INFERENCE PIPELINE",
+        "quote": "Every request passes the same six stages"
+      },
+      "availability": "available",
+      "confidence": "high"
+    },
+    {
+      "topic": "PART 2 · THE INFERENCE PIPELINE",
+      "subtopic": "Pipeline stages",
+      "key_concept": "Stage 1: request arrives",
+      "explanation": "The tokenizer from Day 1 cuts your text into tokens and the request is handed to the server; from then on everything the model sees is a sequence of token IDs, not words.",
+      "examples": [],
+      "important_terms": ["tokenizer", "tokens", "token IDs"],
+      "revision_points": [],
+      "source_reference": {
+        "slide": 7,
+        "section": "PART 2 · THE INFERENCE PIPELINE",
+        "quote": "everything the model sees is a sequence of token IDs, not words"
+      },
+      "availability": "available",
+      "confidence": "high"
+    },
+    {
+      "topic": "PART 2 · THE INFERENCE PIPELINE",
+      "subtopic": "Pipeline stages",
+      "key_concept": "Stage 2: queueing",
+      "explanation": "The server may not start your request immediately; if every slot is busy it waits in a queue, and that waiting time is part of TTFT and under heavy load often dominates it.",
+      "examples": [],
+      "important_terms": ["queue", "TTFT"],
+      "revision_points": [],
+      "source_reference": {
+        "slide": 8,
+        "section": "PART 2 · THE INFERENCE PIPELINE",
+        "quote": "That waiting time is part of TTFT"
+      },
+      "availability": "available",
+      "confidence": "high"
+    },
+    {
+      "topic": "PART 2 · THE INFERENCE PIPELINE",
+      "subtopic": "Pipeline stages",
+      "key_concept": "Stage 3: prefill",
+      "explanation": "Prefill: the model reads the entire prompt in one pass, builds its internal state, then emits the first token; a longer prompt means more work before that first token, so a higher TTFT.",
+      "examples": [],
+      "important_terms": ["Prefill", "TTFT"],
+      "revision_points": [],
+      "source_reference": {
+        "slide": 9,
+        "section": "PART 2 · THE INFERENCE PIPELINE",
+        "quote": "the model reads the entire prompt in one pass, builds its internal state, then emits the first token"
+      },
+      "availability": "available",
+      "confidence": "high"
+    },
+    {
+      "topic": "PART 2 · THE INFERENCE PIPELINE",
+      "subtopic": "Pipeline stages",
+      "key_concept": "Stage 4: decode",
+      "explanation": "Decode: each new token depends on the tokens before it, so the model produces them one at a time; the gap between two consecutive tokens is TPOT and sets how fast text streams.",
+      "examples": [],
+      "important_terms": ["Decode", "TPOT"],
+      "revision_points": [],
+      "source_reference": {
+        "slide": 10,
+        "section": "PART 2 · THE INFERENCE PIPELINE",
+        "quote": "The gap between two consecutive tokens is TPOT, and it sets how fast text streams."
+      },
+      "availability": "available",
+      "confidence": "high"
+    },
+    {
+      "topic": "PART 2 · THE INFERENCE PIPELINE",
+      "subtopic": "Pipeline stages",
+      "key_concept": "Stage 5: batching",
+      "explanation": "To keep an expensive GPU busy, providers batch many requests together: more requests are served per second (throughput), but your own request may have to wait for the batch (latency).",
+      "examples": [],
+      "important_terms": ["batching", "throughput", "latency"],
+      "revision_points": [],
+      "source_reference": {
+        "slide": 13,
+        "section": "PART 2 · THE INFERENCE PIPELINE",
+        "quote": "More requests are served per second (throughput), but your own request may have to wait for the batch (latency)."
+      },
+      "availability": "available",
+      "confidence": "high"
+    },
+    {
+      "topic": "PART 2 · THE INFERENCE PIPELINE",
+      "subtopic": "Pipeline stages",
+      "key_concept": "The full picture",
+      "explanation": "TTFT = queueing + prefill. TPOT = decode time per token. Total latency is everything combined, roughly TTFT + (output tokens - 1) x TPOT.",
+      "examples": [],
+      "important_terms": ["TTFT", "TPOT", "Total latency", "queueing", "prefill"],
+      "revision_points": [
+        "This is the one diagram to remember from today.",
+        "Remember: TTFT = queueing + prefill, TPOT = decode."
+      ],
+      "source_reference": {
+        "slide": 14,
+        "section": "PART 2 · THE INFERENCE PIPELINE",
+        "quote": "TTFT = queueing + prefill. TPOT = decode time per token."
+      },
+      "availability": "available",
+      "confidence": "high"
+    },
+    {
+      "topic": "PART 3 · INSIDE THE ENGINE",
+      "subtopic": "KV cache",
+      "key_concept": "KV cache: what it is",
+      "explanation": "A\uE009ention needs the keys (K) and values (V) of every earlier token; without a cache the model recomputes them for the whole sequence at every step, while with a KV cache each token’s K and V are computed once, stored and reused.",
+      "examples": [],
+      "important_terms": ["KV cache", "K", "V"],
+      "revision_points": [],
+      "source_reference": {
+        "slide": 11,
+        "section": "PART 3 · INSIDE THE ENGINE",
+        "quote": "each token’s K and V are computed once, stored and reused"
+      },
+      "availability": "available",
+      "confidence": "medium"
+    },
+    {
+      "topic": "PART 3 · INSIDE THE ENGINE",
+      "subtopic": "KV cache",
+      "key_concept": "KV cache: the memory bill",
+      "explanation": "The cache stores K and V for every token, in every layer, for every request in the batch — about 0.8 MB per token for a 13B model — and it competes with the weights for GPU memory and sets how many requests fit at once.",
+      "examples": [],
+      "important_terms": ["KV cache", "GPU memory", "13B"],
+      "revision_points": [],
+      "source_reference": {
+        "slide": 12,
+        "section": "PART 3 · INSIDE THE ENGINE",
+        "quote": "about 0.8 MB per token for a 13B model"
+      },
+      "availability": "available",
+      "confidence": "high"
+    },
+    {
+      "topic": "PART 3 · INSIDE THE ENGINE",
+      "subtopic": "Batching and scheduling",
+      "key_concept": "Batching: static vs. continuous",
+      "explanation": "Static batching waits for the slowest request before starting anything new, so finished slots sit idle; continuous (iteration-level) batching refills a freed slot at the very next step, so the GPU stays full and newcomers wait less.",
+      "examples": [],
+      "important_terms": ["Static batching", "Continuous (iteration-level) batching"],
+      "revision_points": [],
+      "source_reference": {
+        "slide": 15,
+        "section": "PART 3 · INSIDE THE ENGINE",
+        "quote": "Continuous (iteration-level) batching refills a freed slot at the very next step"
+      },
+      "availability": "available",
+      "confidence": "high"
+    },
+    {
+      "topic": "PART 3 · INSIDE THE ENGINE",
+      "subtopic": "Batching and scheduling",
+      "key_concept": "Scheduling: who goes next?",
+      "explanation": "Each step the scheduler decides who joins the batch; a long prompt can hog a step and stall everyone’s decoding, so engines slice it, and when KV memory runs out they pause requests or turn them away.",
+      "examples": [],
+      "important_terms": ["scheduler", "KV memory", "p99"],
+      "revision_points": ["These choices shape your p99."],
+      "source_reference": {
+        "slide": 16,
+        "section": "PART 3 · INSIDE THE ENGINE",
+        "quote": "When KV memory runs out they pause requests or turn them away."
+      },
+      "availability": "available",
+      "confidence": "high"
+    },
+    {
+      "topic": "PART 4 · COST-LATENCY TRADE-OFFS",
+      "subtopic": "Model size and choice",
+      "key_concept": "Larger models vs. smaller models",
+      "explanation": "Larger models are usually stronger but slower and pricier per token; smaller models are cheaper and snappier but weaker on complex tasks.",
+      "examples": [],
+      "important_terms": ["Larger models", "Smaller models", "quality"],
+      "revision_points": ["Latency, cost and quality move together."],
+      "source_reference": {
+        "slide": 17,
+        "section": "PART 4 · COST-LATENCY TRADE-OFFS",
+        "quote": "Larger models are usually stronger but slower and pricier per token"
+      },
+      "availability": "available",
+      "confidence": "high"
+    },
+    {
+      "topic": "PART 4 · COST-LATENCY TRADE-OFFS",
+      "subtopic": "Model size and choice",
+      "key_concept": "The real question",
+      "explanation": "Picking a model is a trade-off, not a ranking: the slide’s questions are how long this task can wait, and how wrong it can be. There is no universal answer.",
+      "examples": [],
+      "important_terms": ["trade-off"],
+      "revision_points": ["There is no universal answer."],
+      "source_reference": {
+        "slide": 18,
+        "section": "PART 4 · COST-LATENCY TRADE-OFFS",
+        "quote": "There is no universal answer."
+      },
+      "availability": "available",
+      "confidence": "medium"
+    },
+    {
+      "topic": "PART 4 · COST-LATENCY TRADE-OFFS",
+      "subtopic": "Model size and choice",
+      "key_concept": "Where this is going",
+      "explanation": "Instead of one model for everything, a router picks the model per request: easy ones go to a small, fast model, hard ones to a large, careful one. The slide calls this a soft preview of Day 10.",
+      "examples": [],
+      "important_terms": ["router"],
+      "revision_points": [],
+      "source_reference": {
+        "slide": 19,
+        "section": "PART 4 · COST-LATENCY TRADE-OFFS",
+        "quote": "a router picks the model per request"
+      },
+      "availability": "available",
+      "confidence": "high"
+    },
+    {
+      "topic": "PART 5 · THE PRODUCTION ENGINEER",
+      "subtopic": "Monitoring and diagnosis",
+      "key_concept": "What to monitor",
+      "explanation": "Average latency hides most of these problems; teams watch a small dashboard of percentiles for TTFT and TPOT, token counts, queue and cache health, and output quality. Day 10 (observability) goes deeper.",
+      "examples": [],
+      "important_terms": ["Average latency", "TTFT", "TPOT", "percentiles", "output quality"],
+      "revision_points": [],
+      "source_reference": {
+        "slide": 20,
+        "section": "PART 5 · THE PRODUCTION ENGINEER",
+        "quote": "percentiles for TTFT and TPOT, token counts, queue and cache health, and output quality"
+      },
+      "availability": "available",
+      "confidence": "high"
+    },
+    {
+      "topic": "PART 5 · THE PRODUCTION ENGINEER",
+      "subtopic": "Monitoring and diagnosis",
+      "key_concept": "Symptom to suspect",
+      "explanation": "In production nobody tells you 'the KV cache is full' — you get symptoms; knowing the concepts turns a vague complaint into a short list of suspects, and each suspect lives in one stage of the pipeline.",
+      "examples": [],
+      "important_terms": ["KV cache", "symptoms"],
+      "revision_points": [],
+      "source_reference": {
+        "slide": 25,
+        "section": "PART 5 · THE PRODUCTION ENGINEER",
+        "quote": "each suspect lives in one stage of the pipeline"
+      },
+      "availability": "available",
+      "confidence": "high"
+    },
+    {
+      "topic": "PART 6 · FAILURES AT SCALE",
+      "subtopic": "Case studies",
+      "key_concept": "Case 1: the Reddit username token",
+      "explanation": "In GPT-2/3’s tokenizer, usernames from Reddit’s r/counting forum such as ' SolidGoldMagikarp' became single tokens, yet barely appeared in the model’s training data; asked about them the models denied, hallucinated or produced gibberish. Cited by the source to LessWrong (Feb 2023) and follow-ups by the researchers.",
+      "examples": [],
+      "important_terms": ["GPT-2/3’s tokenizer", "r/counting", "SolidGoldMagikarp"],
+      "revision_points": [],
+      "source_reference": {
+        "slide": 21,
+        "section": "PART 6 · FAILURES AT SCALE",
+        "quote": "became single tokens, yet barely appeared in the model’s training data"
+      },
+      "availability": "available",
+      "confidence": "high"
+    },
+    {
+      "topic": "PART 6 · FAILURES AT SCALE",
+      "subtopic": "Case studies",
+      "key_concept": "Case 2: spam in GPT-4o’s tokenizer",
+      "explanation": "GPT-4o launched in May 2024 with a new 200k-token tokenizer; researchers found that most of its longest Chinese tokens were spam, gambling and adult-site phrases, because the corpus the tokenizer learned from had been polluted by hijacked web pages. Cited by the source to MIT Technology Review (May 2024).",
+      "examples": [],
+      "important_terms": ["GPT-4o", "200k-token tokenizer", "Chinese tokens"],
+      "revision_points": [],
+      "source_reference": {
+        "slide": 22,
+        "section": "PART 6 · FAILURES AT SCALE",
+        "quote": "the corpus the tokenizer learned from had been polluted by hijacked web pages"
+      },
+      "availability": "available",
+      "confidence": "high"
+    },
+    {
+      "topic": "PART 6 · FAILURES AT SCALE",
+      "subtopic": "Case studies",
+      "key_concept": "Case 3: the misrouted requests",
+      "explanation": "Anthropic’s 2025 postmortem: a routing bug sent short-context requests to servers set up for the 1M-token context window; at the worst hour 16% of Sonnet 4 requests were a\uE007ected, and sticky routing kept some users on the wrong servers. Cited by the source to Anthropic Engineering, \"A postmortem of three recent issues\" (Sept 17, 2025).",
+      "examples": [],
+      "important_terms": ["routing bug", "1M-token context window", "Sonnet 4", "sticky routing", "p99"],
+      "revision_points": ["Numbers as reported."],
+      "source_reference": {
+        "slide": 23,
+        "section": "PART 6 · FAILURES AT SCALE",
+        "quote": "a routing bug sent short-context requests to servers set up for the 1M-token context window"
+      },
+      "availability": "available",
+      "confidence": "medium"
+    },
+    {
+      "topic": "PART 6 · FAILURES AT SCALE",
+      "subtopic": "Case studies",
+      "key_concept": "Case 4: 60-80% of memory wasted",
+      "explanation": "Berkeley’s vLLM team found that 2023 serving systems wasted 60-80% of KV-cache memory on fragmentation and over-reservation, which capped batch sizes; paging the cache (PagedA\uE009ention) cut waste below 4% and raised throughput 2-4x. Cited by the source to the vLLM team (June 2023).",
+      "examples": [],
+      "important_terms": ["vLLM", "KV-cache memory", "fragmentation", "over-reservation", "batch sizes"],
+      "revision_points": ["Numbers as reported."],
+      "source_reference": {
+        "slide": 24,
+        "section": "PART 6 · FAILURES AT SCALE",
+        "quote": "cut waste below 4% and raised throughput 2-4x"
+      },
+      "availability": "available",
+      "confidence": "medium"
+    }
+  ],
+  "unavailable_content": [],
+  "extraction_notes": [
+    "Topic labels are the source's own kicker headings, verbatim: WHY IT MATTERS, PART 1 · DEFINITIONS, DEEPENED, PART 2 · THE INFERENCE PIPELINE, PART 3 · INSIDE THE ENGINE, PART 4 · COST-LATENCY TRADE-OFFS, PART 5 · THE PRODUCTION ENGINEER, PART 6 · FAILURES AT SCALE.",
+    "Subtopic labels 'Quick recap from Day 1' and 'New terms for today' (PART 1) and 'A request’s actual journey' (PART 2) are the source's own slide titles; 'Production stakes', 'Pipeline stages', 'KV cache', 'Batching and scheduling', 'Model size and choice', 'Monitoring and diagnosis' and 'Case studies' are inferred, because the source supplies only part headings and slide titles.",
+    "The source's own slide order is not monotonic in its parts: slide 13 (Stage 5: batching) and slide 14 (The full picture) are labelled PART 2 but sit after the PART 3 slides 11 and 12, and slide 25 is labelled PART 5 but sits after the PART 6 slides 21-24. Concepts are grouped under their own part heading and ordered by slide number within the part, which keeps each topic contiguous and in source order of first appearance.",
+    "Decoration-only slides yielding no concepts: slide 1 (title), slide 2 (the hook), slide 27 (next up), slide 28 (appendix source list). Slide 26 (Recap) also yields no new concepts because it only restates definitions, the six-stage pipeline, the engine (KV cache, batching, scheduling, sharding), trade-offs, why it matters in production, and real failures; its line 'Remember: TTFT = queueing + prefill, TPOT = decode.' is recorded as a revision point on the slide 14 latency-formula concept, which states the same formulas.",
+    "'sharding' is named only in the slide 26 recap and is not explained anywhere in the deck, so no concept was created for it; the slide 28 appendix likewise lists further reading (Defeating Nondeterminism in LLM Inference; vLLM docs: Parallelism and Scaling · Sarathi-Serve (OSDI 2024)) that no case slide relies on.",
+    "Chat and quiz prompts carry no concept: slide 3 ('Which would hurt you first? Tell us in the chat.'), slide 4 ('type the full form of TTFT in the chat') and slide 18 ('Which would you pick for your project? Tell us in the chat.').",
+    "Source defect, slide 11: the sentence opens 'A\\uE009ention needs the keys (K) and values (V)…', where U+E009 is a private-use codepoint standing where a ligature glyph belongs. It is unrecoverable from the text layer, so the damaged form is reproduced verbatim in the explanation, the quote was taken from the undamaged second half of the slide, and the concept's confidence is medium.",
+    "Source defect, slide 23: '16% of Sonnet 4 requests were a\\uE007ected' carries U+E007, the same class of unmapped ligature codepoint; reproduced verbatim in the explanation, not repaired, confidence medium. Slide 23 also flags its own figures as 'Numbers as reported.'",
+    "Source defect, slide 24: 'Paging the cache (PagedA\\uE009ention)' and its 'Source:' line carry U+E009; the damaged name is reproduced verbatim in the explanation, not repaired, confidence medium. The same name in the slide 28 appendix list is damaged in the same way.",
+    "Source defect, slide 18: 'Picking a model is a trade-o\\uE007, not a ranking' and 'how wrong can it a\\uE007ord to be' both carry U+E007. The explanation uses 'trade-off' because that term appears undamaged in the part heading 'PART 4 · COST-LATENCY TRADE-OFFS'; the damaged verb is left out rather than reconstructed, and the concept's confidence is medium.",
+    "Source defects on slides that yield no concepts: slide 2 reads 'why it ma\\uE009ers' and slide 26 reads 'why it ma\\uE009ers'. Slide 17's title reads 'Bigger is not always be\\uE009er'; because the title is damaged it was not used as the key_concept, and the concept is named from the slide's own body terms ('Larger models', 'Smaller models'). No word anywhere was reconstructed from a private-use codepoint.",
+    "Curly apostrophes (U+2019) and the interpunct '·' in the part headings are preserved exactly as extracted, in quotes and explanations alike.",
+    "Forward pointers stated by the source ('Day 10 (observability) goes deeper', 'A soft preview of Day 10') are carried inside explanations rather than turned into revision advice; only the source's own emphatic lines ('This is the one diagram to remember from today.', 'These choices shape your p99.', 'Latency, cost and quality move together.', 'There is no universal answer.', 'Each idea today maps to a decision you will be asked to make.', 'Numbers as reported.') are recorded as revision_points.",
+    "The manifest reports one image on every slide (images=1) and no slide flagged lowText; the text layer was sufficient on all 28 slides, so unavailable_content is empty and no image was interpreted or described.",
+    "Slide numbering is the source's own 1-based numbering as given by the slide-NN.md filenames and the 'slide N of 28' markers; nothing was renumbered, and no lecture label, deck title beyond the manifest's 'deck' field, date or URL was invented."
+  ]
+}

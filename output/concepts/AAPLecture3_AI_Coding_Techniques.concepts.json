@@ -1,0 +1,444 @@
+{
+  "schema_version": "1",
+  "source": {
+    "identifier": "AAPLecture3_AI_Coding_Techniques",
+    "kind": "slide_deck",
+    "total_slides": 22,
+    "processed_slides": 22,
+    "unavailable_slides": []
+  },
+  "noise_handling": {
+    "ignored_patterns": ["deboistech", "d"],
+    "notes": "Per the source manifest the tiled 'deboistech' watermark, the per-slide footer and the extraction markers were already removed upstream (manifest cleaning: watermarkLines 726, footerDropped 22, markersDropped 22, dupesCollapsed 0, headingsSplit 0). The one recurring image on every slide is a logo bitmap, not text, and was left untranscribed. No duplicated lines and no fused headings were found in the supplied slide text. The slide number is kept as the source_reference.slide."
+  },
+  "topics": [
+    {
+      "topic": "PART 1 · QUICK TOUR: FOUR TOOLS",
+      "subtopic": "Four tools",
+      "key_concept": "Four tools, one defining trait each",
+      "explanation": "The quick tour frames four tools and gives each one a single defining trait.",
+      "examples": [],
+      "important_terms": ["defining trait"],
+      "revision_points": [],
+      "source_reference": {
+        "slide": 3,
+        "section": "PART 1 · QUICK TOUR: FOUR TOOLS",
+        "quote": "Four tools, one defining trait each."
+      },
+      "availability": "partial",
+      "confidence": "medium"
+    },
+    {
+      "topic": "PART 1 · QUICK TOUR: FOUR TOOLS",
+      "subtopic": "Four tools",
+      "key_concept": "Comparison at a glance",
+      "explanation": "The tools are compared on strength and typical use, one line each.",
+      "examples": [],
+      "important_terms": ["strength", "typical use"],
+      "revision_points": [],
+      "source_reference": {
+        "slide": 4,
+        "section": "PART 1 · QUICK TOUR: FOUR TOOLS",
+        "quote": "Strength and typical use, one line each."
+      },
+      "availability": "partial",
+      "confidence": "medium"
+    },
+    {
+      "topic": "PART 2 · WHY CLAUDE CODE TODAY",
+      "subtopic": "Tool choice",
+      "key_concept": "One tool for execution, not all four",
+      "explanation": "Claude Code is the tool chosen for execution, rather than all four tools of the tour.",
+      "examples": [],
+      "important_terms": ["Claude Code"],
+      "revision_points": ["One tool for execution, not all four."],
+      "source_reference": {
+        "slide": 5,
+        "section": "PART 2 · WHY CLAUDE CODE TODAY",
+        "quote": "One tool for execution, not all four."
+      },
+      "availability": "partial",
+      "confidence": "high"
+    },
+    {
+      "topic": "PART 3 · THE AGENT HARNESS",
+      "subtopic": "What an agent harness is",
+      "key_concept": "Not just a smarter chatbot: a model wired into a loop",
+      "explanation": "The slide answers its own question 'Isn't this just a smarter chatbot?' with 'No: a model wired into a loop.'",
+      "examples": [],
+      "important_terms": ["agent harness", "loop"],
+      "revision_points": ["No: a model wired into a loop."],
+      "source_reference": {
+        "slide": 6,
+        "section": "PART 3 · THE AGENT HARNESS",
+        "quote": "No: a model wired into a loop."
+      },
+      "availability": "partial",
+      "confidence": "high"
+    },
+    {
+      "topic": "PART 3 · THE AGENT HARNESS",
+      "subtopic": "What an agent harness is",
+      "key_concept": "The agent harness loop",
+      "explanation": "The loop is perceive, decide, act, observe, then repeat.",
+      "examples": [],
+      "important_terms": ["perceive", "decide", "act", "observe"],
+      "revision_points": [],
+      "source_reference": {
+        "slide": 7,
+        "section": "PART 3 · THE AGENT HARNESS",
+        "quote": "Perceive, decide, act, observe. Repeat."
+      },
+      "availability": "partial",
+      "confidence": "high"
+    },
+    {
+      "topic": "PART 3 · THE AGENT HARNESS",
+      "subtopic": "What an agent harness is",
+      "key_concept": "What this extends: the environment",
+      "explanation": "What the harness extends is the environment, and the environment joins the conversation.",
+      "examples": [],
+      "important_terms": ["environment"],
+      "revision_points": [],
+      "source_reference": {
+        "slide": 8,
+        "section": "PART 3 · THE AGENT HARNESS",
+        "quote": "The environment joins the conversation."
+      },
+      "availability": "partial",
+      "confidence": "high"
+    },
+    {
+      "topic": "PART 3 · THE AGENT HARNESS",
+      "subtopic": "Model and harness",
+      "key_concept": "Model + harness = agent",
+      "explanation": "The model proposes and the harness does.",
+      "examples": [],
+      "important_terms": ["model", "harness", "agent"],
+      "revision_points": ["The model proposes. The harness does."],
+      "source_reference": {
+        "slide": 9,
+        "section": "PART 3 · THE AGENT HARNESS",
+        "quote": "The model proposes. The harness does."
+      },
+      "availability": "partial",
+      "confidence": "high"
+    },
+    {
+      "topic": "PART 3 · THE AGENT HARNESS",
+      "subtopic": "Model and harness",
+      "key_concept": "What comprises a harness",
+      "explanation": "A harness is everything around the model.",
+      "examples": [],
+      "important_terms": ["harness", "model"],
+      "revision_points": [],
+      "source_reference": {
+        "slide": 10,
+        "section": "PART 3 · THE AGENT HARNESS",
+        "quote": "Everything around the model."
+      },
+      "availability": "partial",
+      "confidence": "high"
+    },
+    {
+      "topic": "PART 3 · THE AGENT HARNESS",
+      "subtopic": "One architecture, four tools",
+      "key_concept": "Four tools, one pa\uE009ern",
+      "explanation": "The four tools share the same architecture and differ in surface.",
+      "examples": [],
+      "important_terms": ["architecture", "surface"],
+      "revision_points": [],
+      "source_reference": {
+        "slide": 11,
+        "section": "PART 3 · THE AGENT HARNESS",
+        "quote": "Same architecture, di\uE007erent surface."
+      },
+      "availability": "partial",
+      "confidence": "medium"
+    },
+    {
+      "topic": "PART 3 · THE AGENT HARNESS",
+      "subtopic": "One architecture, four tools",
+      "key_concept": "The harness you add",
+      "explanation": "The tool ships a harness; you extend it.",
+      "examples": [],
+      "important_terms": ["harness"],
+      "revision_points": [],
+      "source_reference": {
+        "slide": 12,
+        "section": "PART 3 · THE AGENT HARNESS",
+        "quote": "The tool ships one. You extend it."
+      },
+      "availability": "partial",
+      "confidence": "high"
+    },
+    {
+      "topic": "PART 4 · CONCEPTS + LIVE BUILD",
+      "subtopic": "Features",
+      "key_concept": "Feature 1: agentic file editing",
+      "explanation": "It reads and edits real files, not just answers.",
+      "examples": [],
+      "important_terms": ["agentic file editing"],
+      "revision_points": [],
+      "source_reference": {
+        "slide": 13,
+        "section": "PART 4 · CONCEPTS + LIVE BUILD",
+        "quote": "It reads and edits real files, not just answers."
+      },
+      "availability": "partial",
+      "confidence": "high"
+    },
+    {
+      "topic": "PART 4 · CONCEPTS + LIVE BUILD",
+      "subtopic": "Features",
+      "key_concept": "Feature 2: plan mode",
+      "explanation": "It proposes a plan before it acts.",
+      "examples": [],
+      "important_terms": ["plan mode"],
+      "revision_points": [],
+      "source_reference": {
+        "slide": 14,
+        "section": "PART 4 · CONCEPTS + LIVE BUILD",
+        "quote": "It proposes a plan before it acts."
+      },
+      "availability": "partial",
+      "confidence": "high"
+    },
+    {
+      "topic": "PART 4 · CONCEPTS + LIVE BUILD",
+      "subtopic": "Features",
+      "key_concept": "Feature 3: self-correcting on errors",
+      "explanation": "It runs the code, sees errors, fixes them.",
+      "examples": [],
+      "important_terms": ["self-correcting on errors"],
+      "revision_points": [],
+      "source_reference": {
+        "slide": 15,
+        "section": "PART 4 · CONCEPTS + LIVE BUILD",
+        "quote": "It runs the code, sees errors, fixes them."
+      },
+      "availability": "partial",
+      "confidence": "high"
+    },
+    {
+      "topic": "PART 4 · CONCEPTS + LIVE BUILD",
+      "subtopic": "Features",
+      "key_concept": "Feature 4: skills",
+      "explanation": "Teach it once, reuse it every time.",
+      "examples": [],
+      "important_terms": ["skills"],
+      "revision_points": [],
+      "source_reference": {
+        "slide": 16,
+        "section": "PART 4 · CONCEPTS + LIVE BUILD",
+        "quote": "Teach it once, reuse it every time."
+      },
+      "availability": "partial",
+      "confidence": "high"
+    },
+    {
+      "topic": "PART 4 · CONCEPTS + LIVE BUILD",
+      "subtopic": "Features",
+      "key_concept": "Feature 5: MCP",
+      "explanation": "The agent reaches outside the codebase.",
+      "examples": [],
+      "important_terms": ["MCP", "codebase"],
+      "revision_points": [],
+      "source_reference": {
+        "slide": 17,
+        "section": "PART 4 · CONCEPTS + LIVE BUILD",
+        "quote": "The agent reaches outside the codebase."
+      },
+      "availability": "partial",
+      "confidence": "high"
+    },
+    {
+      "topic": "PART 4 · CONCEPTS + LIVE BUILD",
+      "subtopic": "Features",
+      "key_concept": "MCP: the components",
+      "explanation": "The components named in the text are the host, the client and the server; the slide also refers to what a server offers, but that part of the line is unreadable.",
+      "examples": [],
+      "important_terms": ["MCP", "host", "client", "server"],
+      "revision_points": [],
+      "source_reference": {
+        "slide": 18,
+        "section": "PART 4 · CONCEPTS + LIVE BUILD",
+        "quote": "Host, client, server"
+      },
+      "availability": "partial",
+      "confidence": "medium"
+    },
+    {
+      "topic": "PART 4 · CONCEPTS + LIVE BUILD",
+      "subtopic": "Features",
+      "key_concept": "Feature 6: sub-agents",
+      "explanation": "It delegates a sub-task to another agent.",
+      "examples": [],
+      "important_terms": ["sub-agents", "sub-task"],
+      "revision_points": [],
+      "source_reference": {
+        "slide": 19,
+        "section": "PART 4 · CONCEPTS + LIVE BUILD",
+        "quote": "It delegates a sub-task to another agent."
+      },
+      "availability": "partial",
+      "confidence": "high"
+    },
+    {
+      "topic": "BEST PRACTICES",
+      "subtopic": "Checking agent output",
+      "key_concept": "The best-practice checklist",
+      "explanation": "The checklist is not blind trust: it is about knowing exactly where to look.",
+      "examples": [],
+      "important_terms": ["best-practice checklist"],
+      "revision_points": ["Not blind trust: know exactly where to look."],
+      "source_reference": {
+        "slide": 20,
+        "section": "BEST PRACTICES",
+        "quote": "Not blind trust: know exactly where to look."
+      },
+      "availability": "partial",
+      "confidence": "medium"
+    }
+  ],
+  "unavailable_content": [
+    {
+      "location": "slide 2",
+      "kind": "image_only_diagram",
+      "note": "The slide's body is a full-width raster diagram (2046x832) with no text layer. Its contents were not recovered and are deliberately not reconstructed.",
+      "adjacent_text_used": "Under the hood, then building."
+    },
+    {
+      "location": "slide 3",
+      "kind": "image_only_table",
+      "note": "A card grid of four rendered blocks with no text layer. The cards' contents were not recovered and are deliberately not reconstructed.",
+      "adjacent_text_used": "Four tools, one defining trait each."
+    },
+    {
+      "location": "slide 4",
+      "kind": "image_only_table",
+      "note": "A four-tool comparison grid (strength by typical use) rendered as an image with no text layer. Cell contents were not recovered; the tool names, strengths and uses shown in the picture are deliberately not transcribed.",
+      "adjacent_text_used": "Comparison at a glance / Strength and typical use, one line each."
+    },
+    {
+      "location": "slide 5",
+      "kind": "image_only_figure",
+      "note": "A two-row card grid of rendered text blocks with small icons, no text layer. Contents not recovered.",
+      "adjacent_text_used": "One tool for execution, not all four."
+    },
+    {
+      "location": "slide 6",
+      "kind": "image_only_diagram",
+      "note": "A two-panel flow diagram with no text layer. Contents not recovered.",
+      "adjacent_text_used": "No: a model wired into a loop."
+    },
+    {
+      "location": "slide 7",
+      "kind": "image_only_diagram",
+      "note": "A circular flow diagram with no text layer. Contents not recovered.",
+      "adjacent_text_used": "Perceive, decide, act, observe. Repeat."
+    },
+    {
+      "location": "slide 8",
+      "kind": "image_only_diagram",
+      "note": "A two-panel comparison diagram with no text layer. Contents not recovered.",
+      "adjacent_text_used": "The environment joins the conversation."
+    },
+    {
+      "location": "slide 9",
+      "kind": "image_only_diagram",
+      "note": "A diagram with a decomposition band over two panels, no text layer. Contents not recovered.",
+      "adjacent_text_used": "The model proposes. The harness does."
+    },
+    {
+      "location": "slide 10",
+      "kind": "image_only_diagram",
+      "note": "A hub-and-spoke diagram with no text layer. The items drawn around the model were not recovered.",
+      "adjacent_text_used": "Everything around the model."
+    },
+    {
+      "location": "slide 11",
+      "kind": "image_only_diagram",
+      "note": "A diagram of converging arrows with no text layer. Contents not recovered.",
+      "adjacent_text_used": "Same architecture, di\uE007erent surface."
+    },
+    {
+      "location": "slide 12",
+      "kind": "image_only_diagram",
+      "note": "A two-tier box layout with no text layer. The extension points drawn in the boxes were not recovered.",
+      "adjacent_text_used": "The tool ships one. You extend it."
+    },
+    {
+      "location": "slide 13",
+      "kind": "image_only_diagram",
+      "note": "A three-panel diagram with no text layer. Contents not recovered.",
+      "adjacent_text_used": "It reads and edits real files, not just answers."
+    },
+    {
+      "location": "slide 14",
+      "kind": "image_only_diagram",
+      "note": "A horizontal flow diagram with no text layer. Contents not recovered.",
+      "adjacent_text_used": "It proposes a plan before it acts."
+    },
+    {
+      "location": "slide 15",
+      "kind": "image_only_diagram",
+      "note": "A loop diagram with a counter row, no text layer. Contents not recovered.",
+      "adjacent_text_used": "It runs the code, sees errors, fixes them."
+    },
+    {
+      "location": "slide 16",
+      "kind": "image_only_diagram",
+      "note": "A tree diagram with a detail card, no text layer. Contents not recovered.",
+      "adjacent_text_used": "Teach it once, reuse it every time."
+    },
+    {
+      "location": "slide 17",
+      "kind": "image_only_diagram",
+      "note": "A boundary-crossing flow diagram with no text layer. Contents not recovered.",
+      "adjacent_text_used": "The agent reaches outside the codebase."
+    },
+    {
+      "location": "slide 18",
+      "kind": "image_only_diagram",
+      "note": "A three-panel architecture diagram with no text layer. The component labels and relationships drawn in the picture were not recovered.",
+      "adjacent_text_used": "Host, client, server"
+    },
+    {
+      "location": "slide 19",
+      "kind": "image_only_diagram",
+      "note": "A top-down branching flow diagram with no text layer. Contents not recovered.",
+      "adjacent_text_used": "It delegates a sub-task to another agent."
+    },
+    {
+      "location": "slide 20",
+      "kind": "image_only_table",
+      "note": "A card grid of best-practice checklist items with no text layer. The checklist items were not recovered and are deliberately not reconstructed.",
+      "adjacent_text_used": "Not blind trust: know exactly where to look."
+    },
+    {
+      "location": "slide 21",
+      "kind": "image_only_diagram",
+      "note": "A recap chain of rendered nodes with no text layer. The seven recap ideas the slide promises were not recovered.",
+      "adjacent_text_used": "Recap: what you just watched / Seven ideas, each with a place to pause."
+    },
+    {
+      "location": "slide 22",
+      "kind": "image_only_diagram",
+      "note": "A next-week panel with no text layer. The preview contents were not recovered.",
+      "adjacent_text_used": "Today you used agents. Next you build them."
+    }
+  ],
+  "extraction_notes": [
+    "The deck's substantive content is raster. Every slide carries a full-bleed bitmap (2046x832, one per slide, distinct) that holds the slide body, plus one 971x301 logo bitmap reused on all 22 pages. Text extraction recovered only the overlay on each slide: a kicker line, a title and a one-line tagline (54-91 characters per slide). This was confirmed against the PDF image list, not inferred.",
+    "All 21 image-only regions on slides 2-22 are declared in unavailable_content. No image content was transcribed, described or inferred, and no concept below claims to cover the unreadable part of its slide.",
+    "Every concept is marked availability: partial for that reason: the readable text on its slide is the title and tagline only.",
+    "Slide 1 (title slide) yielded no concept. Its image is a decorative title scene. Slide 2 ('THE HOOK') is a section divider and slide 22 ('NEXT UP') is a next-up slide, so per the skill's decoration rule they yield no concept even though their images are declared as gaps. Slide 21 is the recap slide; its seven recap ideas live inside its image, so nothing was recoverable for it.",
+    "The source manifest reports processedSlides 22 and unavailableSlides 0 because its pipeline counted only the text layer. This document additionally declares the image-only regions; no individual slide was wholly textless, so source.unavailable_slides is empty while unavailable_content lists the lost regions.",
+    "Topic labels come from the source's own kicker lines. The subtopic labels are inferred: the source supplies no sub-headings beneath the kickers.",
+    "Source defect: slide 11 carries two private-use codepoints where ligature glyphs belong - U+E009 in the title ('one pa<U+E009>ern') and U+E007 in the tagline ('di<U+E007>erent'). The intended characters are not recoverable from the text layer. The title is reproduced verbatim in key_concept, the quote reproduces U+E007 verbatim, and the concept is marked confidence: medium rather than reconstructed.",
+    "Source defect: slide 18's tagline also contains U+E007 (in 'o<U+E007>ers'). Its quote was taken from the intact opening fragment 'Host, client, server' so the damaged word is not reproduced, and the concept is marked confidence: medium because the fourth component in that line is unreadable.",
+    "No examples anywhere: the supplied text layer contains no worked examples, demos or sample outputs. examples is [] on every concept rather than manufactured.",
+    "Slide numbering is the source's own, 1-based, from the slide-NN.md files and the manifest's slide index. No renumbering was done."
+  ]
+}

@@ -1,0 +1,597 @@
+{
+  "schema_version": "1",
+  "source": {
+    "identifier": "AAPLecture1_LLM_Foundations",
+    "kind": "slide_deck",
+    "total_slides": 34,
+    "processed_slides": 32,
+    "unavailable_slides": [
+      32,
+      34
+    ]
+  },
+  "noise_handling": {
+    "ignored_patterns": [
+      "deboistech",
+      "d"
+    ],
+    "notes": "The per-slide extraction had already removed the tiled 'deboistech' background watermark (manifest: 1122 watermark lines) and the repeated 'deboistech · 2026-10-03' footer (manifest: 34 footers), plus 34 slide markers; the manifest also reports a single-letter 'd' watermark token. Because that cleaning predates this run, none of these tokens remain in the slide text and none were re-stripped here. The running part kicker ('PART 1 · CORE MECHANICS' and siblings) recurs across slides but never three or more times within a line, so it is retained as section, not treated as noise. No duplicated consecutive lines were found (manifest: 0 duplicates collapsed) and no fused headings needed splitting (manifest: 0 headings split)."
+  },
+  "topics": [
+    {
+      "topic": "PART 1 · CORE MECHANICS",
+      "subtopic": "Tokens and tokenization",
+      "key_concept": "What is a token?",
+      "explanation": "Models read tokens rather than text: the token is the unit the model actually consumes.",
+      "examples": [],
+      "important_terms": [
+        "token",
+        "tokens"
+      ],
+      "revision_points": [],
+      "source_reference": {
+        "slide": 3,
+        "section": "PART 1 · CORE MECHANICS",
+        "quote": "Models read tokens, not text."
+      },
+      "availability": "available",
+      "confidence": "high"
+    },
+    {
+      "topic": "PART 1 · CORE MECHANICS",
+      "subtopic": "Tokens and tokenization",
+      "key_concept": "Why tokenization exists",
+      "explanation": "Tokenization exists so that one finite vocabulary can cover endless text.",
+      "examples": [],
+      "important_terms": [
+        "tokenization",
+        "vocabulary"
+      ],
+      "revision_points": [],
+      "source_reference": {
+        "slide": 4,
+        "section": "PART 1 · CORE MECHANICS",
+        "quote": "One finite vocabulary, endless text."
+      },
+      "availability": "available",
+      "confidence": "high"
+    },
+    {
+      "topic": "PART 1 · CORE MECHANICS",
+      "subtopic": "Tokenizers",
+      "key_concept": "BPE · Byte-Pair Encoding",
+      "explanation": "A tokenization method that merges the most frequent pair, then repeats that merge.",
+      "examples": [],
+      "important_terms": [
+        "BPE",
+        "Byte-Pair Encoding"
+      ],
+      "revision_points": [],
+      "source_reference": {
+        "slide": 5,
+        "section": "PART 1 · CORE MECHANICS",
+        "quote": "Merge the most frequent pair. Repeat."
+      },
+      "availability": "available",
+      "confidence": "high"
+    },
+    {
+      "topic": "PART 1 · CORE MECHANICS",
+      "subtopic": "Tokenizers",
+      "key_concept": "WordPiece",
+      "explanation": "Uses a greedy longest match; ## marks a continuation.",
+      "examples": [],
+      "important_terms": [
+        "WordPiece",
+        "##"
+      ],
+      "revision_points": [],
+      "source_reference": {
+        "slide": 6,
+        "section": "PART 1 · CORE MECHANICS",
+        "quote": "Greedy longest match. ## marks a continuation."
+      },
+      "availability": "available",
+      "confidence": "high"
+    },
+    {
+      "topic": "PART 1 · CORE MECHANICS",
+      "subtopic": "Tokenizers",
+      "key_concept": "SentencePiece",
+      "explanation": "Works on raw text, where a space is just a symbol.",
+      "examples": [],
+      "important_terms": [
+        "SentencePiece"
+      ],
+      "revision_points": [],
+      "source_reference": {
+        "slide": 7,
+        "section": "PART 1 · CORE MECHANICS",
+        "quote": "Works on raw text. A space is just a symbol."
+      },
+      "availability": "available",
+      "confidence": "high"
+    },
+    {
+      "topic": "PART 1 · CORE MECHANICS",
+      "subtopic": "Tokenizers",
+      "key_concept": "tiktoken",
+      "explanation": "OpenAI's fast byte-level BPE.",
+      "examples": [],
+      "important_terms": [
+        "tiktoken",
+        "byte-level BPE",
+        "OpenAI"
+      ],
+      "revision_points": [],
+      "source_reference": {
+        "slide": 8,
+        "section": "PART 1 · CORE MECHANICS",
+        "quote": "OpenAI’s fast byte-level BPE."
+      },
+      "availability": "available",
+      "confidence": "high"
+    },
+    {
+      "topic": "PART 1 · CORE MECHANICS",
+      "subtopic": "Model sizes and architectures",
+      "key_concept": "Parameters = model size",
+      "explanation": "Parameters are the model size: billions of tunable numbers.",
+      "examples": [],
+      "important_terms": [
+        "Parameters",
+        "model size"
+      ],
+      "revision_points": [],
+      "source_reference": {
+        "slide": 9,
+        "section": "PART 1 · CORE MECHANICS",
+        "quote": "Billions of tunable numbers."
+      },
+      "availability": "available",
+      "confidence": "high"
+    },
+    {
+      "topic": "PART 1 · CORE MECHANICS",
+      "subtopic": "Model sizes and architectures",
+      "key_concept": "Dense vs. MoE",
+      "explanation": "Contrasts dense models with Mixture of Experts, where only some experts run per token.",
+      "examples": [],
+      "important_terms": [
+        "Dense",
+        "MoE",
+        "Mixture of Experts"
+      ],
+      "revision_points": [],
+      "source_reference": {
+        "slide": 10,
+        "section": "PART 1 · CORE MECHANICS",
+        "quote": "Mixture of Experts: only some experts run per token."
+      },
+      "availability": "available",
+      "confidence": "high"
+    },
+    {
+      "topic": "PART 1 · CORE MECHANICS",
+      "subtopic": "Model sizes and architectures",
+      "key_concept": "Reasoning models",
+      "explanation": "Reasoning models think in tokens before they answer.",
+      "examples": [],
+      "important_terms": [
+        "Reasoning models"
+      ],
+      "revision_points": [],
+      "source_reference": {
+        "slide": 11,
+        "section": "PART 1 · CORE MECHANICS",
+        "quote": "They think in tokens before they answer."
+      },
+      "availability": "available",
+      "confidence": "high"
+    },
+    {
+      "topic": "PART 1 · CORE MECHANICS",
+      "subtopic": "Model sizes and architectures",
+      "key_concept": "Types of models",
+      "explanation": "The deck's guidance on choosing: pick the right kind for the job.",
+      "examples": [],
+      "important_terms": [
+        "Types of models"
+      ],
+      "revision_points": [],
+      "source_reference": {
+        "slide": 12,
+        "section": "PART 1 · CORE MECHANICS",
+        "quote": "Pick the right kind for the job."
+      },
+      "availability": "available",
+      "confidence": "medium"
+    },
+    {
+      "topic": "PART 1 · CORE MECHANICS",
+      "subtopic": "Embeddings and vector search",
+      "key_concept": "Embeddings",
+      "explanation": "Meaning, turned into numbers.",
+      "examples": [],
+      "important_terms": [
+        "Embeddings"
+      ],
+      "revision_points": [],
+      "source_reference": {
+        "slide": 13,
+        "section": "PART 1 · CORE MECHANICS",
+        "quote": "Meaning, turned into numbers."
+      },
+      "availability": "available",
+      "confidence": "high"
+    },
+    {
+      "topic": "PART 1 · CORE MECHANICS",
+      "subtopic": "Embeddings and vector search",
+      "key_concept": "Vector databases",
+      "explanation": "Search by meaning, not by keywords.",
+      "examples": [],
+      "important_terms": [
+        "Vector databases",
+        "keywords"
+      ],
+      "revision_points": [],
+      "source_reference": {
+        "slide": 14,
+        "section": "PART 1 · CORE MECHANICS",
+        "quote": "Search by meaning, not by keywords."
+      },
+      "availability": "available",
+      "confidence": "high"
+    },
+    {
+      "topic": "PART 1 · CORE MECHANICS",
+      "subtopic": "Context window",
+      "key_concept": "Context window",
+      "explanation": "A fixed-size input, not memory. The word following 'input' in the source is damaged by an unmapped U+E007 glyph and is deliberately left unreconstructed.",
+      "examples": [],
+      "important_terms": [
+        "Context window",
+        "memory"
+      ],
+      "revision_points": [],
+      "source_reference": {
+        "slide": 15,
+        "section": "PART 1 · CORE MECHANICS",
+        "quote": "A fixed-size input buer, not memory."
+      },
+      "availability": "available",
+      "confidence": "medium"
+    },
+    {
+      "topic": "PART 1 · CORE MECHANICS",
+      "subtopic": "Context window",
+      "key_concept": "Why long chats forget",
+      "explanation": "Marked as the point where the deck's opening question — its 'THE HOOK' — is answered.",
+      "examples": [],
+      "important_terms": [
+        "long chats"
+      ],
+      "revision_points": [],
+      "source_reference": {
+        "slide": 16,
+        "section": "PART 1 · CORE MECHANICS",
+        "quote": "The hook, answered."
+      },
+      "availability": "available",
+      "confidence": "medium"
+    },
+    {
+      "topic": "PART 1 · CORE MECHANICS",
+      "subtopic": "Context window",
+      "key_concept": "Lost in the middle",
+      "explanation": "The source line begins with a word lost to an unmapped U+E009 glyph, which is not reconstructed; the readable remainder is that it \"isn't even inside the window\".",
+      "examples": [],
+      "important_terms": [
+        "Lost in the middle",
+        "window"
+      ],
+      "revision_points": [],
+      "source_reference": {
+        "slide": 17,
+        "section": "PART 1 · CORE MECHANICS",
+        "quote": "Aention isn’t even inside the window."
+      },
+      "availability": "available",
+      "confidence": "medium"
+    },
+    {
+      "topic": "PART 2 · GENERATION BEHAVIOR",
+      "subtopic": "Sampling controls",
+      "key_concept": "Temperature",
+      "explanation": "Controls randomness: the same prompt can give different results.",
+      "examples": [],
+      "important_terms": [
+        "Temperature"
+      ],
+      "revision_points": [],
+      "source_reference": {
+        "slide": 18,
+        "section": "PART 2 · GENERATION BEHAVIOR",
+        "quote": "Same prompt, dierent randomness."
+      },
+      "availability": "available",
+      "confidence": "medium"
+    },
+    {
+      "topic": "PART 2 · GENERATION BEHAVIOR",
+      "subtopic": "Sampling controls",
+      "key_concept": "Top-p · Top-k",
+      "explanation": "Determines which tokens are even allowed next.",
+      "examples": [],
+      "important_terms": [
+        "Top-p",
+        "Top-k"
+      ],
+      "revision_points": [],
+      "source_reference": {
+        "slide": 19,
+        "section": "PART 2 · GENERATION BEHAVIOR",
+        "quote": "Which tokens are even allowed next."
+      },
+      "availability": "available",
+      "confidence": "high"
+    },
+    {
+      "topic": "PART 2 · GENERATION BEHAVIOR",
+      "subtopic": "Failure modes",
+      "key_concept": "Hallucination",
+      "explanation": "Confident, plausible, and wrong.",
+      "examples": [],
+      "important_terms": [
+        "Hallucination"
+      ],
+      "revision_points": [],
+      "source_reference": {
+        "slide": 20,
+        "section": "PART 2 · GENERATION BEHAVIOR",
+        "quote": "Confident, plausible, wrong."
+      },
+      "availability": "available",
+      "confidence": "high"
+    },
+    {
+      "topic": "PART 3 · STRUCTURE",
+      "subtopic": "Knowledge sources",
+      "key_concept": "Prompt vs. training data",
+      "explanation": "Separates what the model knows from what you told it.",
+      "examples": [],
+      "important_terms": [
+        "Prompt",
+        "training data"
+      ],
+      "revision_points": [],
+      "source_reference": {
+        "slide": 21,
+        "section": "PART 3 · STRUCTURE",
+        "quote": "What it knows vs. what you told it."
+      },
+      "availability": "available",
+      "confidence": "high"
+    },
+    {
+      "topic": "PART 3 · STRUCTURE",
+      "subtopic": "Token economics",
+      "key_concept": "Token economics",
+      "explanation": "Billed per token. Input and output are set against each other, but the source's connecting word is an unmapped U+E007 glyph and is not reconstructed.",
+      "examples": [],
+      "important_terms": [
+        "Token economics",
+        "token"
+      ],
+      "revision_points": [],
+      "source_reference": {
+        "slide": 22,
+        "section": "PART 3 · STRUCTURE",
+        "quote": "Billed per token. Input and output dier."
+      },
+      "availability": "available",
+      "confidence": "medium"
+    },
+    {
+      "topic": "PART 3 · STRUCTURE",
+      "subtopic": "Token economics",
+      "key_concept": "Input · output · cached",
+      "explanation": "What each kind of token costs.",
+      "examples": [],
+      "important_terms": [
+        "Input",
+        "output",
+        "cached"
+      ],
+      "revision_points": [],
+      "source_reference": {
+        "slide": 23,
+        "section": "PART 3 · STRUCTURE",
+        "quote": "What each kind of token costs."
+      },
+      "availability": "available",
+      "confidence": "high"
+    },
+    {
+      "topic": "PART 3 · STRUCTURE",
+      "subtopic": "Token economics",
+      "key_concept": "Prompt caching",
+      "explanation": "Repeated prefixes get cheaper.",
+      "examples": [],
+      "important_terms": [
+        "Prompt caching",
+        "prefixes"
+      ],
+      "revision_points": [],
+      "source_reference": {
+        "slide": 24,
+        "section": "PART 3 · STRUCTURE · PRODUCTION NOTE",
+        "quote": "Repeated prefixes get cheaper."
+      },
+      "availability": "available",
+      "confidence": "high"
+    },
+    {
+      "topic": "PART 3 · STRUCTURE",
+      "subtopic": "Token budgeting and truncation",
+      "key_concept": "Token budgeting",
+      "explanation": "Everything competes for one window.",
+      "examples": [],
+      "important_terms": [
+        "Token budgeting",
+        "window"
+      ],
+      "revision_points": [],
+      "source_reference": {
+        "slide": 25,
+        "section": "PART 3 · STRUCTURE",
+        "quote": "Everything competes for one window."
+      },
+      "availability": "available",
+      "confidence": "high"
+    },
+    {
+      "topic": "PART 3 · STRUCTURE",
+      "subtopic": "Token budgeting and truncation",
+      "key_concept": "Silent truncation bugs",
+      "explanation": "Naive truncation drops the oldest first.",
+      "examples": [],
+      "important_terms": [
+        "Silent truncation bugs",
+        "truncation"
+      ],
+      "revision_points": [
+        "The deck labels this a bug: silent truncation, where naive truncation drops the oldest first."
+      ],
+      "source_reference": {
+        "slide": 26,
+        "section": "PART 3 · STRUCTURE",
+        "quote": "Naive truncation drops the oldest first."
+      },
+      "availability": "available",
+      "confidence": "high"
+    },
+    {
+      "topic": "PART 4 · INFERENCE VOCABULARY",
+      "subtopic": "Prompt cost and latency",
+      "key_concept": "Prompts cost time, too",
+      "explanation": "The deck flags that prompts also cost time — not just correctness and cost.",
+      "examples": [],
+      "important_terms": [
+        "Prompts",
+        "cost"
+      ],
+      "revision_points": [],
+      "source_reference": {
+        "slide": 27,
+        "section": "PART 4 · INFERENCE VOCABULARY",
+        "quote": "Not just correctness and cost."
+      },
+      "availability": "available",
+      "confidence": "high"
+    },
+    {
+      "topic": "PART 4 · INFERENCE VOCABULARY",
+      "subtopic": "Latency metrics",
+      "key_concept": "TTFT",
+      "explanation": "Time to first token.",
+      "examples": [],
+      "important_terms": [
+        "TTFT"
+      ],
+      "revision_points": [],
+      "source_reference": {
+        "slide": 28,
+        "section": "PART 4 · INFERENCE VOCABULARY",
+        "quote": "Time to first token."
+      },
+      "availability": "available",
+      "confidence": "high"
+    },
+    {
+      "topic": "PART 4 · INFERENCE VOCABULARY",
+      "subtopic": "Latency metrics",
+      "key_concept": "TPOT",
+      "explanation": "Time per output token.",
+      "examples": [],
+      "important_terms": [
+        "TPOT"
+      ],
+      "revision_points": [],
+      "source_reference": {
+        "slide": 29,
+        "section": "PART 4 · INFERENCE VOCABULARY",
+        "quote": "Time per output token."
+      },
+      "availability": "available",
+      "confidence": "high"
+    },
+    {
+      "topic": "PART 4 · INFERENCE VOCABULARY",
+      "subtopic": "Latency vs. throughput",
+      "key_concept": "Latency vs. throughput",
+      "explanation": "The deck contrasts starting fast with serving many.",
+      "examples": [],
+      "important_terms": [
+        "Latency",
+        "throughput"
+      ],
+      "revision_points": [],
+      "source_reference": {
+        "slide": 30,
+        "section": "PART 4 · INFERENCE VOCABULARY",
+        "quote": "Start fast vs. serve many."
+      },
+      "availability": "available",
+      "confidence": "high"
+    },
+    {
+      "topic": "PART 4 · INFERENCE VOCABULARY",
+      "subtopic": "Streaming",
+      "key_concept": "Streaming",
+      "explanation": "Why text appears word by word.",
+      "examples": [],
+      "important_terms": [
+        "Streaming"
+      ],
+      "revision_points": [],
+      "source_reference": {
+        "slide": 31,
+        "section": "PART 4 · INFERENCE VOCABULARY",
+        "quote": "Why text appears word by word."
+      },
+      "availability": "available",
+      "confidence": "high"
+    }
+  ],
+  "unavailable_content": [
+    {
+      "location": "slide 32",
+      "kind": "image_only_figure",
+      "note": "Recap divider. The extraction manifest marks this slide low-text and lists it as unavailable; only the running label 'RECAP' and the one-line caption 'Five ideas, one answer.' survived the text layer, while two images carry the slide. The recap items themselves were not recovered and were not reconstructed.",
+      "adjacent_text_used": ""
+    },
+    {
+      "location": "slide 34",
+      "kind": "image_only_figure",
+      "note": "Next-up divider. The extraction manifest marks this slide low-text and lists it as unavailable; only the running label 'NEXT UP' and the one-line caption 'Up next: Day 2 & 3' survived the text layer, while two images carry the slide. Its contents were not recovered and were not reconstructed.",
+      "adjacent_text_used": ""
+    }
+  ],
+  "extraction_notes": [
+    "Identifier taken from the extraction manifest's 'deck' field. The deck's title slide carries 'DAY 1 · ASTRA · TRACK 1, WEEK 1', but the source supplies no lecture label, so source_reference.lecture is omitted on every concept rather than invented.",
+    "Slide numbering is the source's own 1-based order as presented in slide-01.md … slide-34.md; no renumbering was applied.",
+    "Topic labels are the deck's own part kickers, verbatim: 'PART 1 · CORE MECHANICS' (slides 3-17), 'PART 2 · GENERATION BEHAVIOR' (18-20), 'PART 3 · STRUCTURE' (21-26, with slide 24's kicker extending to 'PART 3 · STRUCTURE · PRODUCTION NOTE'), 'PART 4 · INFERENCE VOCABULARY' (27-31).",
+    "Subtopic labels are inferred: the source supplies only part kickers, no sub-headings. Inferred labels used: Tokens and tokenization, Tokenizers, Model sizes and architectures, Embeddings and vector search, Context window, Sampling controls, Failure modes, Knowledge sources, Token economics, Token budgeting and truncation, Prompt cost and latency, Latency metrics, Latency vs. throughput, Streaming.",
+    "Decoration-only slides yielded no concepts: slide 1 (title), slide 2 ('THE HOOK' divider), slide 32 ('RECAP' divider), slide 33 ('Quiz Time!' with the kahoot.com join slide), slide 34 ('NEXT UP').",
+    "Slides 32 and 34 are carried into source.unavailable_slides and unavailable_content exactly as the manifest lists them (lowText: true, 2 images each). Slide 33 is decoration-only but text-bearing, so it counts as processed and produced no concept.",
+    "Source defect (slide 8): the apostrophe in 'OpenAI’s' is U+2019, not ASCII. Quoted verbatim; normalised to ASCII only inside the explanation.",
+    "Source defect (unmapped glyphs): slide 15 and slide 18 and slide 22 each contain U+E007, and slide 17 contains U+E009 — private-use codepoints standing where ligature glyphs were not mapped by the PDF font. These are unrecoverable from the text layer, so each is reproduced verbatim in its quote and no intended word was written. The four affected concepts are marked confidence 'medium', and their explanations record the damage instead of guessing it.",
+    "Slide 12 ('Types of models') names no model types in its text layer — only the line 'Pick the right kind for the job.' No list of types was supplied; the concept records only what the text states and is marked 'medium'.",
+    "Slide 16 ('Why long chats forget') carries only the heading and the line 'The hook, answered.', so the concept records the source's own pointer back to the slide 2 hook rather than an explanation the source never gives; marked 'medium'.",
+    "No worked examples, sample prompts or sample outputs appear anywhere in the extracted text, so every examples array is empty. No figures, tables or numbers beyond the slide text were introduced.",
+    "The manifest reports two embedded images on every slide except slide 33. Image contents were not read, described or transcribed; nothing in this output reflects image content.",
+    "The deck's recap slide (32) is flagged unavailable, so no recap-derived revision points were derivable; the single revision point recorded is slide 26's own 'Silent truncation bugs' framing, taken from its heading and caption."
+  ]
+}

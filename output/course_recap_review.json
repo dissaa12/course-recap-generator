@@ -1,0 +1,234 @@
+{
+  "reviewer": "course-recap-reviewer",
+  "schema_version": "1",
+  "source": {
+    "deck": "AAPLecture1_LLM_Foundations, AAPLecture2_Prompt_Engineering, AAPLecture3_AI_Coding_Techniques, AAPLecture4_Inference_Basics",
+    "slides_considered": 112,
+    "concepts_considered": 97,
+    "unavailable_slides": [
+      "AAPLecture1_LLM_Foundations slide 32 (manifest lowText; text layer = divider + 'Five ideas, one answer.')",
+      "AAPLecture1_LLM_Foundations slide 34 (manifest lowText; next-up divider)",
+      "AAPLecture2_Prompt_Engineering slide 27 (manifest lowText; text layer = divider + 'Five ideas, one answer.')"
+    ]
+  },
+  "overall_status": "NEEDS_REVISION",
+  "summary": "All 112 slide files, four manifests, four concepts records and the extraction log were read, and the recap's substantive course content (L1 mechanics, L2 prompt techniques, L3 harness, L4 pipeline, the four sourced incident case studies, the latency formulas and the 0.8 MB/token figure) traces cleanly to the decks. Five blocking defects sit in the recap's provenance and extraction-limitations sections rather than in its course content: an unsourced '850 occurrences' figure, a cited review-record file that does not exist, 'RAG on Day 4' where slide 27 says 'Up next: Day 4', a claim that the 'Five ideas, one answer' line is unrecoverable when both slide files carry it verbatim, and a reference to a Lecture 3 'slide 24' in a 22-slide deck. The single most important fix is to make §8 and §9 state only what the manifests, concepts records and log actually record.",
+  "checks": {
+    "source_faithfulness": "issue",
+    "completeness": "issue",
+    "unsupported_content": "issue",
+    "accuracy": "issue",
+    "organization": "issue",
+    "revision_usefulness": "issue"
+  },
+  "counts": {
+    "missing_concepts": 3,
+    "unsupported_claims": 3,
+    "inaccurate_claims": 6,
+    "organization_issues": 2,
+    "revision_usefulness_issues": 2,
+    "blocking": 5,
+    "advisory": 11
+  },
+  "missing_concepts": [
+    {
+      "concept": "Types of models — 'Pick the right kind for the job.'",
+      "source_ref": "AAPLecture1_LLM_Foundations slide 12 ('Types of models / Pick the right kind for the job.'); concept record entry 'Types of models', source_reference.slide 12, confidence medium",
+      "why_it_matters": "The recap's L1 key-concept list jumps from Reasoning models (slide 11) to Embeddings (slide 13), so the deck's own slide 12 has no coverage anywhere in the recap even though the concepts record carries it; a learner cannot tell what Part 1 said between those two.",
+      "severity": "advisory"
+    },
+    {
+      "concept": "Why long chats forget — 'The hook, answered.'",
+      "source_ref": "AAPLecture1_LLM_Foundations slide 16 ('Why long chats forget / The hook, answered.'); concepts record entry 'Why long chats forget', slide 16; the hook it answers is slide 2 ('Today we answer it mechanically, not vaguely.')",
+      "why_it_matters": "Neither the deck's opening hook (slide 2) nor the slide where the deck says it is answered (slide 16) appears in the recap, so the one narrative thread L1 states for itself is invisible to a learner.",
+      "severity": "advisory"
+    },
+    {
+      "concept": "Mock version history — 'One prompt, three versions.'",
+      "source_ref": "AAPLecture2_Prompt_Engineering slide 24 ('Mock version history / One prompt, three versions.'); concepts record entry 'Mock version history', slide 24, note: 'the mock's own content was carried by the slide's graphics and was not recovered'",
+      "why_it_matters": "The recap lists 'Mock version history' only as a topic label in §3 and never states it as a concept, its one-line claim, or that its content is a declared gap; §8 does not list slide 24 among the gaps, so a reader gets neither the concept nor the limitation.",
+      "severity": "advisory"
+    }
+  ],
+  "unsupported_claims": [
+    {
+      "claim": "Both were detected from the data (850 occurrences of the token across 34 slides) and stripped: 3,696 watermark lines and 112 footers across the four decks.",
+      "recap_location": "§8 Extraction limitations — 'Watermark noise'",
+      "source_ref": "No source carries 850. extracted/AAPLecture1_LLM_Foundations/manifest.json records cleaning.watermarkLines 1122 and cleaning.footerDropped 34; evidence/logs/extract-pdf.log records 'watermark fragments:1122 lines removed' and 'footers dropped: 34'. The surrounding figures do reconcile (1122+924+726+924 = 3,696; 34+28+22+28 = 112).",
+      "note": "A specific occurrence count appears in no manifest, log, concepts record or slide file; it is an unsourced number inside a section whose stated purpose is to report only what the data shows.",
+      "severity": "blocking"
+    },
+    {
+      "claim": "Its findings and the resulting edits are recorded in `output/course_recap_review.json` and `evidence/review/`.",
+      "recap_location": "§9 Review record",
+      "source_ref": "No such file exists: output/ contains only course_recap.json and course_recap.md, and evidence/review/ contains only course_recap.draft.md. docs/planning.md §11.2 (E6) and §9 place reviewer output at `evidence/review/<deck>.review.json` and `output/reviews/<deck-slug>.review.json`.",
+      "note": "The recap asserts an inspectable review record that is absent and points at a path the project plan does not use, so a reader cannot check the claimed findings or edits.",
+      "severity": "blocking"
+    },
+    {
+      "claim": "The thread connecting the four decks is that a model is a mechanism, not an oracle.",
+      "recap_location": "§1 Course overview",
+      "source_ref": "No slide in any deck states this framing; the closest source lines are L1 slide 2 'Today we answer it mechanically, not vaguely.' and L3 slide 9 'The model proposes. The harness does.'",
+      "note": "Editorial framing presented as the decks' shared thesis; harmless as commentary but unsourced, in a document that states 'Every claim below is traceable to a slide reference.'",
+      "severity": "advisory"
+    }
+  ],
+  "inaccurate_claims": [
+    {
+      "claim": "Lecture 4 to RAG on Day 4 (L4 slide 27)",
+      "recap_location": "§1 Course overview (deck-interlock sentence)",
+      "source_ref": "AAPLecture4_Inference_Basics slide 27: 'Up next: Day 4 / Today was about how fast an answer comes back. Tomorrow: how to make sure the answer is actually right, using retrieval-augmented generation (RAG).' Slide 1 of the same deck already reads 'DAY 4 · ASTRA · ONLINE SESSION', which the recap repeats in §2.",
+      "distortion": "Slide 27 is a forward pointer ('Up next', 'Tomorrow'), so it places the RAG session after this deck, not on Day 4. The recap's own §2 table has Day 4 as this deck's day, so as written the sentence puts RAG on the same day as the inference lecture and silently resolves a day-number conflict the source itself contains, without flagging it — as it does flag the L4 part-ordering anomaly.",
+      "severity": "blocking"
+    },
+    {
+      "claim": "L1 slide 32's 'Five ideas' and L2 slide 27's 'Five ideas, one answer' are therefore not recoverable from the text layer and are not listed as revision points.",
+      "recap_location": "§8 Extraction limitations — 'Low-text slides'",
+      "source_ref": "extracted/AAPLecture1_LLM_Foundations/slide-32.md line 7 'Five ideas, one answer.'; extracted/AAPLecture2_Prompt_Engineering/slide-27.md line 7 'Five ideas, one answer.'; the L1 concepts record's unavailable_content entry for slide 32 reads \"only the running label 'RECAP' and the one-line caption 'Five ideas, one answer.' survived the text layer\".",
+      "distortion": "The quoted line is present verbatim in both text layers; only the individual recap items behind it are unrecoverable. The recap also contradicts itself: §7 lists 'Five ideas, one answer.' (slide 32) as an L1 revision point and §3 lists the same phrase as an L2 topic, then §8 says it is not recoverable and not listed.",
+      "severity": "blocking"
+    },
+    {
+      "claim": "Lecture 3: None found in the source as text. Slides 8, 9, 14, 18 and 24 carry interactive or graphical material whose contents are not in the text layer.",
+      "recap_location": "§6 Examples found in the source — 'Lecture 3'",
+      "source_ref": "AAPLecture3_AI_Coding_Techniques has 22 slides (manifest.json totalSlides 22, processedSlides 22, unavailableSlides []; files run slide-01.md … slide-22.md). There is no slide 24 to inspect.",
+      "distortion": "The recap cites a slide number beyond the end of the deck, so the claim cannot be checked against the source and one of the five listed slides does not exist. Per the L3 concepts record the image-only regions are in fact slides 2–22, so the list also understates the deck-wide gap that §8 describes.",
+      "severity": "blocking"
+    },
+    {
+      "claim": "`U+E007` (ff) appears in L1 slides 15, 17, 18 and 22 and in L2 slide 16 and L4 slides 23 and 24",
+      "recap_location": "§8 Extraction limitations — 'Unmapped glyphs'",
+      "source_ref": "extracted/AAPLecture1_LLM_Foundations/slide-17.md carries U+E009, not U+E007 (byte-level check of the file; the damaged word is 'Attention'); the L1 concepts record's slide-17 entry says 'an unmapped U+E009 glyph' and its extraction_notes assign U+E007 to slides 15, 18 and 22 only.",
+      "distortion": "One slide is assigned to the wrong codepoint class, contradicting both the verbatim slide file and the L1 concepts record; the recap's own worked example for the same codepoint class is correct, so the inventory and the examples disagree.",
+      "severity": "advisory"
+    },
+    {
+      "claim": "The unmapped-glyph inventory is complete as listed (L115/17/18/22; L2 16 for U+E007; L2 4/21, L3 11, L4 11/17/24 for U+E009).",
+      "recap_location": "§8 Extraction limitations — 'Unmapped glyphs'",
+      "source_ref": "Damaged lines the recap omits: AAPLecture3_AI_Coding_Techniques slide 18 ('server o<U+E007>ers'); AAPLecture4_Inference_Basics slide 2 ('why it ma<U+E009>ers'), slide 18 ('trade-o<U+E007>, not a ranking' and 'how wrong can it a<U+E007>ord to be'), slide 26 ('trade-o<U+E007>s, why it ma<U+E009>ers in production'), slide 28 ('PagedA<U+E009>ention'). The L4 concepts record records each of these as a source defect.",
+      "distortion": "Five damaged slides, one of them twice, are absent from an inventory presented as exhaustive, so the recap understates how much of the corpus's text layer is affected.",
+      "severity": "advisory"
+    },
+    {
+      "claim": "**Not read at all.** L1 slide 33 is a Kahoot quiz slide; L4 slide 28 is an appendix source list; L3 slide 22 and L2 slide 28 are next-up previews. Their contents are not summarised because they are navigational or bibliographic.",
+      "recap_location": "§8 Extraction limitations — 'Not read at all'",
+      "source_ref": "These four slides were extracted and are text-bearing: L1 slide 33 ('Quiz Time! / Four options, one answer. / ABC / kahoot.com'), L4 slide 28 (529 characters, the largest in any deck, listing seven sources including 'Defeating Nondeterminism in LLM Inference — thinkingmachines.ai' and 'vLLM docs: Parallelism and Scaling · Sarathi-Serve (OSDI 2024) — docs.vllm.ai'), L3 slide 22 and L2 slide 28.",
+      "distortion": "The heading asserts the slides were not read when their text is present; the L4 appendix is the densest slide in the corpus and two of its entries are mentioned nowhere in the recap. Declining to summarise is defensible; describing the slides as unread is not.",
+      "severity": "advisory"
+    }
+  ],
+  "organization_issues": [
+    {
+      "issue": "The four-deck bullet list in §1 labels the third deck 'Lecture 6' while §2, §3 and §4 call the same deck 'Lecture 3', and the list order (1, 2, 6, 4) mixes lecture numbers with day numbers.",
+      "location": "§1 Course overview — bullet 'Lecture 6 moves to tooling'",
+      "suggested_fix": "Use one identifier per deck throughout (the recap's own slide-order numbering or the source's DAY label) and state once which convention is in force.",
+      "severity": "advisory"
+    },
+    {
+      "issue": "In the Lecture 4 topic table, slides 11–12 appear twice — inside the 'Part 2 · The Inference Pipeline | 6–14' row and again in 'Part 3 · Inside the Engine | 11, 12, 15, 16' — which contradicts §8's statement that items are grouped under their own part heading.",
+      "location": "§3 Topics covered — Lecture 4 table",
+      "suggested_fix": "Make the Part 2 row exclude the slides the deck itself labels Part 3, and keep the ordering anomaly note in §8 as the single place that explains it.",
+      "severity": "advisory"
+    }
+  ],
+  "revision_usefulness_issues": [
+    {
+      "issue": "The monitoring entry reproduces the dashboard items but drops the source's reason for using percentiles, so a learner learns what to watch without learning why averages are insufficient.",
+      "location": "§4 Key concepts — Lecture 4, 'What to monitor' (slide 20)",
+      "suggested_fix": "Include the caveat the slide leads with on slide 20 ('Average latency hides most of these problems') alongside the dashboard list.",
+      "severity": "advisory"
+    },
+    {
+      "issue": "The source's own forward pointers that tie this deck to later sessions are dropped, so the recap's 'course thread' ends at Week 2 / RAG while the decks themselves point further ahead.",
+      "location": "§4 Key concepts — Lecture 4, 'Routing per request' and 'What to monitor' (slides 19, 20)",
+      "suggested_fix": "Carry the source's own forward references from slides 19 and 20 (the Day 10 preview and the Day 10 observability pointer) so the deck's stated onward path is visible, as §1 does for the next-up slides.",
+      "severity": "advisory"
+    }
+  ],
+  "recommended_corrections": [
+    {
+      "priority": 1,
+      "action": "Delete the '850 occurrences' figure from §8, or replace it with the watermark counts the manifests and the extraction log actually record; keep 3,696 and 112 only if they stay consistent with the per-deck manifests.",
+      "target": "§8 Extraction limitations — 'Watermark noise'",
+      "source_ref": "extracted/AAPLecture1_LLM_Foundations/manifest.json cleaning.watermarkLines 1122; evidence/logs/extract-pdf.log 'watermark fragments:1122 lines removed'",
+      "severity": "blocking"
+    },
+    {
+      "priority": 2,
+      "action": "Correct the review-record citation: either point §9 at the review artefact that actually exists (evidence/review/) or drop the reference to the non-existent output/course_recap_review.json, so the record does not claim an inspectable file the reader cannot open.",
+      "target": "§9 Review record",
+      "source_ref": "output/ contains only course_recap.json and course_recap.md; docs/planning.md §11.2 E6 places reviewer output at evidence/review/<deck>.review.json",
+      "severity": "blocking"
+    },
+    {
+      "priority": 3,
+      "action": "Rewrite the Lecture 4 interlock clause to state what slide 27 actually says, and add this deck's own day-number conflict to the anomaly list in §8 rather than resolving it silently.",
+      "target": "§1 Course overview — deck-interlock sentence",
+      "source_ref": "AAPLecture4_Inference_Basics slide 27 'Up next: Day 4 / Tomorrow: … retrieval-augmented generation (RAG)'; slide 1 'DAY 4 · ASTRA · ONLINE SESSION'",
+      "severity": "blocking"
+    },
+    {
+      "priority": 4,
+      "action": "Reword §8 so it claims only that the individual recap items are unrecoverable, not that the 'Five ideas, one answer' caption is absent from the text layer, and make §3 and §7 consistent with whatever §8 then says.",
+      "target": "§8 'Low-text slides'; cross-check §3 Lecture 2 row and §7 Lecture 1 line",
+      "source_ref": "extracted/AAPLecture1_LLM_Foundations/slide-32.md and extracted/AAPLecture2_Prompt_Engineering/slide-27.md both contain 'Five ideas, one answer.'",
+      "severity": "blocking"
+    },
+    {
+      "priority": 5,
+      "action": "Remove the out-of-range 'slide 24' from the Lecture 3 sentence in §6 and restate that sentence against slide numbers the deck actually has (the L3 image-only regions are slides 2–22 per its concepts record).",
+      "target": "§6 Examples found in the source — 'Lecture 3'",
+      "source_ref": "extracted/AAPLecture3_AI_Coding_Techniques/manifest.json totalSlides 22; output/concepts/AAPLecture3_AI_Coding_Techniques.concepts.json unavailable_content locations 'slide 2' … 'slide 22'",
+      "severity": "blocking"
+    },
+    {
+      "priority": 6,
+      "action": "Correct the codepoint assigned to L1 slide 17 in the glyph inventory so it agrees with the verbatim slide file and with the L1 concepts record.",
+      "target": "§8 'Unmapped glyphs' — U+E007 slide list",
+      "source_ref": "extracted/AAPLecture1_LLM_Foundations/slide-17.md (U+E009 at byte level); L1 concepts record extraction_notes 'slide 17 contains U+E009'",
+      "severity": "advisory"
+    },
+    {
+      "priority": 7,
+      "action": "Extend the glyph inventory to the damaged slides the recap omits, or state explicitly that the list is a selection rather than a complete census.",
+      "target": "§8 'Unmapped glyphs'",
+      "source_ref": "L3 slide 18; L4 slides 2, 18 (two occurrences), 26 and 28; each is recorded as a source defect in the L3 and L4 concepts records",
+      "severity": "advisory"
+    },
+    {
+      "priority": 8,
+      "action": "Retitle the 'Not read at all' block so it says these four slides were extracted but deliberately not summarised, and either list the appendix entries the deck names or say why the appendix is out of scope.",
+      "target": "§8 'Not read at all'",
+      "source_ref": "extracted/AAPLecture4_Inference_Basics/slide-28.md (seven source entries, 529 chars); extracted/AAPLecture1_LLM_Foundations/slide-33.md ('kahoot.com')",
+      "severity": "advisory"
+    },
+    {
+      "priority": 9,
+      "action": "Give L1 slides 12 and 16 and L2 slide 24 a line each in §4, or add them to a stated exclusion list in §8 so their absence is deliberate and locatable.",
+      "target": "§4 Key concepts — Lecture 1 and Lecture 2 lists",
+      "source_ref": "L1 slide 12 'Pick the right kind for the job.'; L1 slide 16 'The hook, answered.'; L2 slide 24 'One prompt, three versions.'",
+      "severity": "advisory"
+    },
+    {
+      "priority": 10,
+      "action": "Surface the monitoring caveat the deck leads with, and carry the source's own forward pointers, instead of listing the dashboard items alone.",
+      "target": "§4 Key concepts — Lecture 4, 'What to monitor' and 'Routing per request'",
+      "source_ref": "L4 slide 20 'Average latency hides most of these problems.' and 'Day 10 (observability) goes deeper.'; slide 19 'A soft preview of Day 10.'",
+      "severity": "advisory"
+    },
+    {
+      "priority": 11,
+      "action": "Make the §3 Lecture 4 part rows mutually exclusive so each slide is listed once, and leave the non-monotonic part numbering to §8.",
+      "target": "§3 Topics covered — Lecture 4 table",
+      "source_ref": "L4 slide 11 and 12 carry 'PART 3 · INSIDE THE ENGINE'; slides 13–14 carry 'PART 2 · THE INFERENCE PIPELINE'",
+      "severity": "advisory"
+    },
+    {
+      "priority": 12,
+      "action": "Use one deck identifier consistently in §1's bullet list, or mark the framing sentence ('mechanism, not an oracle') as the recap's own commentary rather than a deck claim.",
+      "target": "§1 Course overview",
+      "source_ref": "L1 slide 2 'Today we answer it mechanically, not vaguely.' (no slide states the mechanism/oracle framing)",
+      "severity": "advisory"
+    }
+  ]
+}

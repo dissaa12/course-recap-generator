@@ -1,0 +1,289 @@
+%% Course Recap Generator - concept relationship diagram
+%% Source of every node label: output/concepts/*.concepts.json
+%%
+%% Node labels are source-grounded. Each one is a `topic`, `subtopic` or `key_concept`
+%% from a concept file, which the skill derived verbatim from the extracted slides.
+%% Deck labels are each deck's own part heading. No node label is invented.
+%%
+%% Edges are a different matter and are NOT all stated by the slides. Most edges express
+%% grouping and ordering inferred from each deck's own part/slide structure - they are a
+%% reading of the material, not quotations. The three cross-deck edges at the foot of this
+%% file carry labels quoting the slides that ground them, and are cited there.
+%%
+%% Structural checks run by `npm run check`: every label traces to a concept file, every
+%% node id used in an edge is defined, and no two nodes share a label. This file has not
+%% been render-tested - no Mermaid renderer is installed in this environment.
+
+flowchart TD
+
+  subgraph L1["Lecture 1 · LLM Foundations (Day 1) — 34 slides"]
+    direction TB
+    L1P1["PART 1 · CORE MECHANICS"]
+    L1TOK["What is a token?"]
+    L1WHYTOK["Why tokenization exists"]
+    L1BPE["BPE · Byte-Pair Encoding"]
+    L1WP["WordPiece"]
+    L1SP["SentencePiece"]
+    L1TIK["tiktoken"]
+    L1PARAM["Parameters = model size"]
+    L1MOE["Dense vs. MoE"]
+    L1REASON["Reasoning models"]
+    L1TYPES["Types of models"]
+    L1EMB["Embeddings"]
+    L1VDB["Vector databases"]
+    L1CW["Context window"]
+    L1FORGET["Why long chats forget"]
+    L1MID["Lost in the middle"]
+
+    L1P1 --> L1TOK
+    L1TOK --> L1WHYTOK
+    L1WHYTOK --> L1BPE
+    L1WHYTOK --> L1WP
+    L1WHYTOK --> L1SP
+    L1WHYTOK --> L1TIK
+    L1P1 --> L1PARAM
+    L1PARAM --> L1MOE
+    L1PARAM --> L1REASON
+    L1P1 --> L1TYPES
+    L1P1 --> L1EMB
+    L1EMB --> L1VDB
+    L1P1 --> L1CW
+    L1CW --> L1FORGET
+    L1FORGET --> L1MID
+
+    L1P2["PART 2 · GENERATION BEHAVIOR"]
+    L1TEMP["Temperature"]
+    L1TOPK["Top-p · Top-k"]
+    L1HALL["Hallucination"]
+    L1P2 --> L1TEMP
+    L1TEMP --> L1TOPK
+    L1TOPK --> L1HALL
+
+    L1P3["PART 3 · STRUCTURE"]
+    L1PVD["Prompt vs. training data"]
+    L1ECON["Token economics"]
+    L1IOC["Input · output · cached"]
+    L1CACHE["Prompt caching"]
+    L1BUDGET["Token budgeting"]
+    L1TRUNC["Silent truncation bugs"]
+    L1P3 --> L1PVD
+    L1P3 --> L1ECON
+    L1ECON --> L1IOC
+    L1IOC --> L1CACHE
+    L1CACHE --> L1BUDGET
+    L1BUDGET --> L1TRUNC
+
+    L1P4["PART 4 · INFERENCE VOCABULARY"]
+    L1COSTT["Prompts cost time, too"]
+    L1TTFT["TTFT"]
+    L1TPOT["TPOT"]
+    L1LVT["Latency vs. throughput"]
+    L1STREAM["Streaming"]
+    L1P4 --> L1COSTT
+    L1P4 --> L1TTFT
+    L1P4 --> L1TPOT
+    L1TTFT --> L1LVT
+    L1TPOT --> L1LVT
+    L1LVT --> L1STREAM
+  end
+
+  subgraph L2["Lecture 2 · Prompt Engineering (Day 2) — 28 slides"]
+    direction TB
+    L2P1["PART 1 · PROMPT STRUCTURE"]
+    L2FOUR["A good prompt has four parts"]
+    L2TONE["Models don't infer intent from tone"]
+    L2P1 --> L2FOUR
+    L2P1 --> L2TONE
+
+    L2P2["PART 2 · STRUCTURING TECHNIQUES"]
+    L2WALL["The wall-of-text problem"]
+    L2XML["XML sandwiching"]
+    L2MARKUP["Why structure works"]
+    L2DELIM["The principle beats the syntax"]
+    L2LIVE1["Live: before and after, typing both prompts and comparing the outputs"]
+    L2DEF["Structure is also a defense"]
+    L2P2 --> L2WALL
+    L2WALL --> L2XML
+    L2XML --> L2MARKUP
+    L2MARKUP --> L2DELIM
+    L2XML --> L2LIVE1
+    L2XML --> L2DEF
+
+    L2P3["PART 3 · ZERO TO FEW-SHOT"]
+    L2ZERO["Zero-shot"]
+    L2ONE["One-shot"]
+    L2FEW["Few-shot"]
+    L2P3 --> L2ZERO
+    L2ZERO --> L2ONE
+    L2ONE --> L2FEW
+
+    L2P4["PART 4 · FAILURE PATTERNS"]
+    L2AMB["Ambiguous instructions"]
+    L2CONF["Conflicting constraints"]
+    L2DRIFT["Format drift"]
+    L2ARGUE["The model argues with itself"]
+    L2PRED["Prompts fail in predictable ways"]
+    L2P4 --> L2AMB
+    L2P4 --> L2CONF
+    L2P4 --> L2DRIFT
+    L2P4 --> L2ARGUE
+    L2DEF --> L2PRED
+    L2AMB --> L2PRED
+    L2CONF --> L2PRED
+    L2DRIFT --> L2PRED
+    L2ARGUE --> L2PRED
+
+    L2P5["PART 5 · PRODUCTION CONCERNS"]
+    L2INJ["Prompt injection"]
+    L2INJLIVE["Live: a concrete injection"]
+    L2WHYSOON["Why it matters more soon"]
+    L2SINPUT["One defense: structured input"]
+    L2VER["Prompt versioning"]
+    L2MOCK["Mock version history"]
+    L2TEST["Testing prompts"]
+    L2EVAL["A small eval set"]
+    L2P5 --> L2INJ
+    L2INJ --> L2INJLIVE
+    L2INJ --> L2WHYSOON
+    L2WHYSOON --> L2SINPUT
+    L2SINPUT --> L2VER
+    L2VER --> L2MOCK
+    L2PRED --> L2TEST
+    L2TEST --> L2EVAL
+  end
+
+  subgraph L3["Lecture 3 · AI Coding Techniques (Day 6) — 22 slides · largely graphical"]
+    direction TB
+    L3P1["PART 1 · QUICK TOUR: FOUR TOOLS"]
+    L3FOUR["Four tools, one defining trait each"]
+    L3GLANCE["Comparison at a glance"]
+    L3P2["PART 2 · WHY CLAUDE CODE TODAY"]
+    L3CHOICE["One tool for execution, not all four"]
+    L3P3["PART 3 · THE AGENT HARNESS"]
+    L3NOTCHAT["Not just a smarter chatbot: a model wired into a loop"]
+    L3LOOP["The agent harness loop"]
+    L3ENV["What this extends: the environment"]
+    L3EQ["Model + harness = agent"]
+    L3COMPR["What comprises a harness"]
+    L3ONEPAT["One architecture, four tools"]
+    L3YOUADD["The harness you add"]
+    L3P4["PART 4 · CONCEPTS + LIVE BUILD"]
+    L3F1["Feature 1: agentic file editing"]
+    L3F2["Feature 2: plan mode"]
+    L3F3["Feature 3: self-correcting on errors"]
+    L3F4["Feature 4: skills"]
+    L3F5["Feature 5: MCP"]
+    L3MCP["MCP: the components"]
+    L3F6["Feature 6: sub-agents"]
+    L3BP["BEST PRACTICES"]
+    L3CHK["The best-practice checklist"]
+
+    L3P1 --> L3FOUR
+    L3FOUR --> L3GLANCE
+    L3GLANCE --> L3CHOICE
+    L3P3 --> L3NOTCHAT
+    L3NOTCHAT --> L3LOOP
+    L3LOOP --> L3ENV
+    L3LOOP --> L3COMPR
+    L3ENV --> L3EQ
+    L3COMPR --> L3EQ
+    L3EQ --> L3ONEPAT
+    L3ONEPAT --> L3YOUADD
+    L3P4 --> L3F1
+    L3P4 --> L3F2
+    L3P4 --> L3F3
+    L3P4 --> L3F4
+    L3P4 --> L3F5
+    L3F5 --> L3MCP
+    L3P4 --> L3F6
+    L3YOUADD --> L3F1
+    L3BP --> L3CHK
+    L3CHK --> L3BP
+  end
+
+  subgraph L4["Lecture 4 · Inference Basics (Day 4) — 28 slides"]
+    direction TB
+    L4WHY["WHY IT MATTERS"]
+    L4PROD["Why a production engineer cares"]
+    L4P1["PART 1 · DEFINITIONS, DEEPENED"]
+    L4LAT["Latency vs. throughput"]
+    L4BATCHD["Batching"]
+    L4CONC["Concurrency"]
+    L4QUEUE["Queueing"]
+    L4COLD["Cold starts"]
+    L4P2["PART 2 · THE INFERENCE PIPELINE"]
+    L4JOURNEY["A request's actual journey"]
+    L4S1["Stage 1: request arrives"]
+    L4S2["Stage 2: queueing"]
+    L4S3["Stage 3: prefill"]
+    L4S4["Stage 4: decode"]
+    L4S5["Stage 5: batching"]
+    L4FULL["The full picture"]
+    L4P3["PART 3 · INSIDE THE ENGINE"]
+    L4KV["KV cache: what it is"]
+    L4KVMEM["KV cache: the memory bill"]
+    L4BC["Batching: static vs. continuous"]
+    L4SCHED["Scheduling: who goes next?"]
+    L4P4["PART 4 · COST-LATENCY TRADE-OFFS"]
+    L4BIG["Larger models vs. smaller models"]
+    L4REAL["The real question"]
+    L4ROUTER["Where this is going"]
+    L4P5["PART 5 · THE PRODUCTION ENGINEER"]
+    L4MON["What to monitor"]
+    L4SYMP["Symptom to suspect"]
+    L4P6["PART 6 · FAILURES AT SCALE"]
+    L4C1["Case 1: the Reddit username token"]
+    L4C2["Case 2: spam in GPT-4o's tokenizer"]
+    L4C3["Case 3: the misrouted requests"]
+    L4C4["Case 4: 60-80% of memory wasted"]
+
+    L4WHY --> L4PROD
+    L4PROD --> L4LAT
+    L4P1 --> L4BATCHD
+    L4P1 --> L4CONC
+    L4P1 --> L4QUEUE
+    L4P1 --> L4COLD
+    L4LAT --> L4JOURNEY
+    L4BATCHD --> L4JOURNEY
+    L4QUEUE --> L4JOURNEY
+    L4COLD --> L4JOURNEY
+    L4JOURNEY --> L4S1
+    L4JOURNEY --> L4S2
+    L4JOURNEY --> L4S3
+    L4JOURNEY --> L4S4
+    L4JOURNEY --> L4S5
+    L4S2 --> L4S3
+    L4S3 --> L4FULL
+    L4S4 --> L4FULL
+    L4S5 --> L4FULL
+    L4P3 --> L4KV
+    L4KV --> L4KVMEM
+    L4P3 --> L4BC
+    L4BC --> L4SCHED
+    L4KVMEM --> L4SCHED
+    L4P4 --> L4BIG
+    L4BIG --> L4REAL
+    L4REAL --> L4ROUTER
+    L4P5 --> L4MON
+    L4MON --> L4SYMP
+    L4P6 --> L4C1
+    L4P6 --> L4C2
+    L4P6 --> L4C3
+    L4P6 --> L4C4
+    L4SCHED --> L4SYMP
+    L4C1 --> L4SYMP
+    L4C2 --> L4SYMP
+    L4C3 --> L4SYMP
+    L4C4 --> L4SYMP
+  end
+
+%% Cross-deck edges. Reuse the existing L1 node ids - do NOT redeclare a node here, or
+%% the same concept would appear twice as two separate boxes. Each edge label quotes the
+%% slide that grounds it.
+%%
+%%   L1TTFT  L1 slide 28 "TTFT / Time to first token."
+%%   L4LAT   L4 slide  4 "Quick recap from Day 1 ... refresher of the five words from Day 1"
+%%   L4S1    L4 slide  7 "The tokenizer from Day 1 cuts your text into tokens"
+  L1TTFT -->|"recapped from Day 1"| L4LAT
+  L1TOK -->|"the tokenizer from Day 1"| L4S1
+  L4S1 -.->|"token IDs, not words"| L4FULL

@@ -1,0 +1,10 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "mcp": {
+    "pdf-reader": {
+      "type": "local",
+      "command": ["npx", "-y", "@rturv/mcp-pdf-reader"],
+      "enabled": true
+    }
+  }
+}

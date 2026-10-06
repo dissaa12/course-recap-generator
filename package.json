@@ -1,0 +1,17 @@
+{
+  "name": "course-recap-generator",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Generates reviewed, source-cited course recaps from lecture slide PDFs.",
+  "scripts": {
+    "extract": "node scripts/extract-pdf.mjs",
+    "extract:list": "node scripts/extract-pdf.mjs --list",
+    "validate:concepts": "node .opencode/skills/extract-course-concepts/scripts/validate-concepts.mjs",
+    "recap": "opencode run --command recap",
+    "check": "node scripts/check-output.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

@@ -1,0 +1,263 @@
+{
+  "reviewer": "course-recap-reviewer",
+  "schema_version": "1",
+  "source": {
+    "deck": "AAPLecture1_LLM_Foundations, AAPLecture2_Prompt_Engineering, AAPLecture3_AI_Coding_Techniques, AAPLecture4_Inference_Basics",
+    "slides_considered": 112,
+    "concepts_considered": 97,
+    "unavailable_slides": [
+      "L1 slide 32 (manifest unavailableSlides/lowText; caption 'Five ideas, one answer.' survives in the text layer)",
+      "L1 slide 34 (manifest unavailableSlides/lowText; caption 'Up next: Day 2 & 3' survives in the text layer)",
+      "L2 slide 27 (manifest unavailableSlides/lowText; caption 'Five ideas, one answer.' survives in the text layer)",
+      "L3 slides 2-22, 21 image-only regions (declared only in output/concepts/AAPLecture3_AI_Coding_Techniques.concepts.json unavailable_content; the L3 manifest declares unavailableSlides: [] and lowText: false on all 22)"
+    ]
+  },
+  "overall_status": "NEEDS_REVISION",
+  "summary": "Bounded verification pass: all 14 corrections itemised in section 9 of output/course_recap.md were checked against the 112 extracted slides, four manifests, four concepts records and evidence/logs/extract-pdf.log, plus a byte-level private-use scan of every slide file and a deck-by-deck check of all 120 node labels in output/course_concept_diagram.mmd. Ten of the fourteen corrections are confirmed fully correct as applied; #13 and #14 are only partially confirmed. The single blocking regression is that section 8's new damage inventory - introduced by correction #13 itself - records the wrong private-use codepoint for Lecture 3 slide 11: the recap says one pa<U+E007>ern where the slide and the L3 concepts record both read U+E009. The section 9 Pass 1 scope problem was checked specifically and is left open: the heading still reads (5 blocking, 11 advisory) above a nine-row table with no scope statement.",
+  "checks": {
+    "source_faithfulness": "issue",
+    "completeness": "pass",
+    "unsupported_content": "pass",
+    "accuracy": "issue",
+    "organization": "issue",
+    "revision_usefulness": "pass"
+  },
+  "counts": {
+    "missing_concepts": 0,
+    "unsupported_claims": 0,
+    "inaccurate_claims": 2,
+    "organization_issues": 7,
+    "revision_usefulness_issues": 0,
+    "blocking": 1,
+    "advisory": 8
+  },
+  "missing_concepts": [],
+  "unsupported_claims": [],
+  "inaccurate_claims": [
+    {
+      "claim": "Section 8's damage inventory entry 'one pa<U+E007>ern (L3 slide 11)', repeated in section 9 row 13's exception list as 'L3 slide 11, Four tools, one pattern - the source reads one pa<U+E007>ern'. Both appear under section 8's stated standard 'Complete inventory, verified byte-level against the extracted files'.",
+      "recap_location": "output/course_recap.md section 8 Extraction limitations, Unmapped glyphs - damage list (line 335) and exception bullet (line 345); section 9 row 13 (line 415)",
+      "source_ref": "extracted/AAPLecture3_AI_Coding_Techniques/slide-11.md title line is 'Four tools, one pa\\uE009ern' (byte-level position scan: U+E009 at index 18 of that line); the tagline line is 'Same architecture, di\\uE007erent surface.' (U+E007 at index 21). output/concepts/AAPLecture3_AI_Coding_Techniques.concepts.json extraction_notes agrees: 'Source defect: slide 11 carries two private-use codepoints where ligature glyphs belong - U+E009 in the title (one pa<U+E009>ern) and U+E007 in the tagline (di<U+E007>erent)'. The same file's key_concept for slide 11 is 'Four tools, one pa\\uE009ern'.",
+      "distortion": "The recap assigns U+E007 to the damaged word in the slide title where both the verbatim slide file and the concepts record assign U+E009; U+E007 belongs to a different word on the same slide. This is the identical defect class that pass 1 found (wrong codepoint for L1 slide 17) and that pass 2 found blocking (slide 2 filed under the wrong codepoint): a verifier is sent to the wrong codepoint, and the string is presented as byte-verified when it is not. It is a regression rather than a pre-existing error: this entry was added by correction #13 and appears in neither evidence/review/course_recap.draft.md nor evidence/review/course_recap.revised.md.",
+      "severity": "blocking"
+    },
+    {
+      "claim": "Section 8's closing sentence 'Every other unmapped glyph in this corpus is reproduced verbatim.'",
+      "recap_location": "output/course_recap.md section 8 Extraction limitations, Unmapped glyphs, final line (line 347)",
+      "source_ref": "Three sites outside the three exceptions section 8 lists reconstruct a damaged word silently. (a) section 3 Topics covered, Lecture 2 Part 1 row reads 'Why structure matters'; extracted/AAPLecture2_Prompt_Engineering/slide-04.md title is 'Why structure ma\\uE009ers' and the L2 concepts record extraction_notes states 'Slide 4 heading Why structure ma<U+E009>ers (U+E009)'. (b) section 4 Key concepts, Lecture 4 reads 'Picking a model is a trade-off, not a ranking'; extracted/AAPLecture4_Inference_Basics/slide-18.md reads 'Picking a model is a trade-o\\uE007, not a ranking' and the L4 concepts record records 'Source defect, slide 18: Picking a model is a trade-o\\uE007, not a ranking ... the damaged verb is left out rather than reconstructed'. (c) section 5 failure case studies, row 3 reads 'were affected'; extracted/AAPLecture4_Inference_Basics/slide-23.md reads 'At the worst hour 16% of Sonnet 4 requests were a\\uE007ected, and sticky routing' and the L4 concepts record records 'Source defect, slide 23: 16% of Sonnet 4 requests were a\\uE007ected ... reproduced verbatim in the explanation, not repaired'.",
+      "distortion": "The guarantee is stated absolutely and is false at three sites section 8 does not flag. The L4 concepts record explicitly justifies writing 'trade-off' only because the part heading carries the term undamaged - a rationale the recap does not carry across, so in the recap the word reads as a verbatim reproduction where the source word is damaged. No substantive figure or mechanism is misstated at any of the three sites, which is why this is advisory rather than blocking.",
+      "severity": "advisory"
+    }
+  ],
+  "organization_issues": [
+    {
+      "issue": "Section 1 still labels the third deck 'Lecture 6' in the bullet list while the same section, and sections 2, 3, 4 and 10, label it 'Lecture 3'. Section 1's own closing sentence refers to 'Lecture 3's slide 22', so section 1 is inconsistent with itself as well as with the rest of the document. The bullet order (1, 2, 6, 4) also interleaves lecture numbers with day numbers.",
+      "location": "output/course_recap.md section 1 Course overview - bullet 3 (line 29) and the interlock sentence (line 36)",
+      "suggested_fix": "Use the deck labels section 2 establishes for the third bullet, or drop the numeric labels from the bullets and name the decks. Not among the fourteen section 9 corrections, so it was never actioned.",
+      "severity": "advisory"
+    },
+    {
+      "issue": "The Lecture 4 row 'Part 2 / The Inference Pipeline | 6-14' still claims slides 11 and 12, which the same table lists again in 'Part 3 / Inside the Engine | 11, 12, 15, 16' and which the source labels 'PART 3 - INSIDE THE ENGINE'. This still contradicts section 8's statement that 'Concepts are grouped under their own part heading and ordered by slide number within each part'.",
+      "location": "output/course_recap.md section 3 Topics covered - Lecture 4 table, Part 2 row (line 93)",
+      "suggested_fix": "Split the range so the Part 2 row lists only the slides the source labels Part 2 (6-10 plus 13-14), leaving the Part 3 row as the sole home for 11, 12, 15 and 16. The non-monotonic ordering itself is correctly documented in section 8 and needs no change. Not among the fourteen section 9 corrections, so it was never actioned.",
+      "severity": "advisory"
+    },
+    {
+      "issue": "The Lecture 2 topic inventory is still silent on three slides inside the ranges it lists: Part 4 'Failure Patterns | 14-18' names four topics for five slides and omits slide 18 ('Prompts fail in predictable ways'), and Part 5 'Production Concerns | 19-26' names six topics for eight slides and omits slide 20 ('Live: a concrete injection') and slide 21 ('Why it ma\\uE009ers more soon'). All three are covered elsewhere in the recap (sections 5, 6, 7), so this is a table-coverage gap rather than lost content.",
+      "location": "output/course_recap.md section 3 Topics covered - Lecture 2 table, Part 4 and Part 5 rows (lines 72-73)",
+      "suggested_fix": "Either add the three slide topics to the table rows, or mark the Topics column as selective so the ranges and counts do not read as exhaustive. Not among the fourteen section 9 corrections, so it was never actioned.",
+      "severity": "advisory"
+    },
+    {
+      "issue": "The section 9 Pass 1 scope problem is LEFT OPEN. The heading '### Pass 1 - NEEDS_REVISION (5 blocking, 11 advisory)' is followed immediately by a nine-row table (rows 1-9: five blocking, four advisory), and no sentence anywhere in section 9 states that the table is a subset. The current wording does remove the old 'across 16 findings' total and the 'Findings and applied edits' lead-in, but it replaces neither with a scope statement, so the table still reads as the complete record of the first review and the section 9 lead-in ('the corrections from each were applied') still implies every finding was actioned. The Pass 2 heading '(5 blocking)' above exactly five rows is by contrast consistent. Checked specifically as instructed: unresolved.",
+      "location": "output/course_recap.md section 9 Review record - Pass 1 heading (line 391) and the table beneath it (lines 393-403)",
+      "suggested_fix": "State the table's scope explicitly, for example that it lists the five blocking and four selected advisory findings, or reconcile the heading counts with the rows shown. Not among the fourteen section 9 corrections.",
+      "severity": "advisory"
+    },
+    {
+      "issue": "The new section 9 'Verification practice' subsection asserts 'Two pass-2 findings were confirmed as genuine errors in this document', but section 9 itself lists five pass-2 blocking findings (rows 10-14) and records an action taken for every one of them. A correction cannot be applied without the finding having been genuine, so the count and the table contradict each other inside the same section.",
+      "location": "output/course_recap.md section 9 Review record - Verification practice (line 425)",
+      "suggested_fix": "Make the count agree with rows 10-14, or state which two findings the sentence refers to. Not among the fourteen section 9 corrections; this subsection is new in the current pass.",
+      "severity": "advisory"
+    },
+    {
+      "issue": "In the diagram, the Lecture 4 Part 1 node is labelled 'Latency vs. throughput'. The L4 concepts record names that concept 'Latency and throughput' (slide 4, subtopic 'Quick recap from Day 1'); 'Latency vs. throughput' is the Lecture 1 key_concept from L1 slide 30, already present in the file as L1LVT inside the L1 subgraph. The label is grounded somewhere in the corpus but is attributed to the wrong deck, so the diagram's own standard - every node label being a key_concept in that deck's concepts record - does not hold for this node. All 116 other node labels were checked and do match their own deck's topic, subtopic or key_concept, and every deck and part label is that deck's own verbatim kicker from the extracted slides.",
+      "location": "output/course_concept_diagram.mmd line 202 (L4LAT)",
+      "suggested_fix": "Relabel the node with the Lecture 4 deck's own concept name, or state explicitly that the label is shared across decks. Note that scripts/check-output.mjs validates labels against a glob-wide union of all four concepts files, so npm run check cannot catch this; the check does pass, reporting 'all 120 diagram label(s) traced to extracted concepts'.",
+      "severity": "advisory"
+    },
+    {
+      "issue": "The diagram's cross-deck block declares two orphan nodes outside every subgraph whose ids are new but whose labels duplicate nodes already defined inside the L1 subgraph: 'What is a token?' (duplicate of L1TOK) and 'WordPiece' (duplicate of L1WP). Neither orphan carries any L1-subgraph edge, so the same concept appears twice in the rendered diagram and the file's claim that no node was invented is true of labels but not of nodes.",
+      "location": "output/course_concept_diagram.mmd lines 275-276",
+      "suggested_fix": "Draw the cross-deck edges from the existing subgraph node ids rather than declaring duplicate nodes, or move the declarations inside the L1 subgraph. Not among the fourteen section 9 corrections.",
+      "severity": "advisory"
+    }
+  ],
+  "revision_usefulness_issues": [],
+  "recommended_corrections": [
+    {
+      "priority": 1,
+      "action": "Correct the private-use codepoint in the L3 slide 11 damage string so it matches the verbatim slide file and the L3 concepts record, and re-verify the other seven damage strings byte-level while doing so (all seven were re-checked here and are correct).",
+      "target": "output/course_recap.md section 8 damage list ('one pa<U+E007>ern (L3 slide 11)'); section 9 row 13 exception bullet (same string)",
+      "source_ref": "extracted/AAPLecture3_AI_Coding_Techniques/slide-11.md: U+E009 in 'Four tools, one pa<U>E009ern', U+E007 in 'Same architecture, di<U>E007erent surface.'; L3 concepts record extraction_notes: 'U+E009 in the title (one pa<U>E009>ern) and U+E007 in the tagline (di<U>E007>erent)'",
+      "severity": "blocking"
+    },
+    {
+      "priority": 2,
+      "action": "Either drop the absolute closing sentence or bring the three unflagged reconstructions into the flagged-exception scheme, so the recap does not guarantee verbatim reproduction of unmapped glyphs it has silently reproduced.",
+      "target": "output/course_recap.md section 8 closing line 'Every other unmapped glyph in this corpus is reproduced verbatim.'; the reconstruction sites at the section 3 Lecture 2 Part 1 row, the section 4 Lecture 4 slide 18 entry, and section 5 case-study row 3",
+      "source_ref": "extracted/AAPLecture2_Prompt_Engineering/slide-04.md 'Why structure ma<U>E009ers'; extracted/AAPLecture4_Inference_Basics/slide-18.md 'a trade-o<U>E007, not a ranking'; extracted/AAPLecture4_Inference_Basics/slide-23.md 'were a<U>E007ected'",
+      "severity": "advisory"
+    },
+    {
+      "priority": 3,
+      "action": "Complete the scoping that correction #13 began: soften or cross-reference the categorical guarantee where it is made, drop the L1 slide 22 exception that current section 4 no longer needs, and flag the second damaged word on L3 slide 11 that section 4 still reconstructs silently.",
+      "target": "output/course_recap.md section 8 opening 'These were quoted verbatim and never reconstructed'; section 8 exception bullet 'L1 slide 22, Token economics'; section 4 Lecture 3 slide 11 entry 'same architecture, different surface'",
+      "source_ref": "extracted/AAPLecture1_LLM_Foundations/slide-22.md 'Input and output di<U>E007er'; extracted/AAPLecture3_AI_Coding_Techniques/slide-11.md 'Same architecture, di<U>E007erent surface.'",
+      "severity": "advisory"
+    },
+    {
+      "priority": 4,
+      "action": "Restore the evidentiary pointer at the point the Lecture 3 image-only claim is made, not only in the correction table and the appendix, so a reader can locate the artefact carrying the 21 declarations.",
+      "target": "output/course_recap.md section 8 'Lecture 3 is largely graphical - the largest gap. 21 of its 22 slides'; section 9 first bullet under 'Residual reviewer limitations'",
+      "source_ref": "extracted/AAPLecture3_AI_Coding_Techniques/manifest.json unavailableSlides: []; output/concepts/AAPLecture3_AI_Coding_Techniques.concepts.json unavailable_content (slides 2-22)",
+      "severity": "advisory"
+    },
+    {
+      "priority": 5,
+      "action": "State the scope of the Pass 1 action table so its nine rows are not read as the complete first-review record, as the heading's own severity counts currently imply.",
+      "target": "output/course_recap.md section 9 heading '### Pass 1 - NEEDS_REVISION (5 blocking, 11 advisory)' and the nine-row table beneath it",
+      "source_ref": "output/course_recap_review.json counts: blocking 5, advisory 11, 16 findings across six arrays; the current table lists rows 1-9 only",
+      "severity": "advisory"
+    },
+    {
+      "priority": 6,
+      "action": "Make the pass-2 confirmation count agree with the five pass-2 blocking corrections section 9 records, or name the two findings the sentence refers to.",
+      "target": "output/course_recap.md section 9 'Two pass-2 findings were confirmed as genuine errors in this document'",
+      "source_ref": "output/course_recap_review_pass2.json counts.blocking 5; output/course_recap.md section 9 rows 10-14 each record an action taken",
+      "severity": "advisory"
+    },
+    {
+      "priority": 7,
+      "action": "Use the deck labels section 2 establishes for the third deck in section 1's bullet list, or remove the numeric labels there.",
+      "target": "output/course_recap.md section 1 bullet 'Lecture 6 moves to tooling' versus section 1 'Lecture 3's slide 22' and sections 2, 3, 4, 10",
+      "source_ref": "extracted/AAPLecture3_AI_Coding_Techniques/slide-01.md 'DAY 6 - ASTRA - TRACK 1, WEEK 1'; output/course_recap.md section 2 deck table row 3",
+      "severity": "advisory"
+    },
+    {
+      "priority": 8,
+      "action": "Split the Lecture 4 Part 2 slide range so slides 11 and 12 are claimed only by the Part 3 row, and either list the three omitted Lecture 2 slide topics or mark the Topics column as selective.",
+      "target": "output/course_recap.md section 3 Lecture 4 table row 'Part 2 / The Inference Pipeline | 6-14'; section 3 Lecture 2 table rows 'Part 4 / Failure Patterns | 14-18' and 'Part 5 / Production Concerns | 19-26'",
+      "source_ref": "extracted/AAPLecture4_Inference_Basics/slide-11.md and slide-12.md kicker 'PART 3 - INSIDE THE ENGINE'; extracted/AAPLecture2_Prompt_Engineering/slide-18.md 'Prompts fail in predictable ways', slide-20.md 'Live: a concrete injection', slide-21.md 'Why it ma<U>E009ers more soon'",
+      "severity": "advisory"
+    },
+    {
+      "priority": 9,
+      "action": "Give the Lecture 4 Part 1 node the Lecture 4 deck's own concept name, and draw the cross-deck edges from the existing subgraph node ids instead of declaring duplicate nodes outside every subgraph.",
+      "target": "output/course_concept_diagram.mmd L4LAT label; the orphan declarations L1TOKEN and L1TOKETIZER",
+      "source_ref": "output/concepts/AAPLecture4_Inference_Basics.concepts.json key_concept 'Latency and throughput' (slide 4); output/concepts/AAPLecture1_LLM_Foundations.concepts.json key_concept 'Latency vs. throughput' (slide 30)",
+      "severity": "advisory"
+    }
+  ],
+  "correction_verification": [
+    {
+      "id": 1,
+      "section": "Pass 1",
+      "claimed_action": "Replaced with manifest-derived totals: 3,696 watermark lines, 112 footers",
+      "verdict": "confirmed",
+      "evidence": "output/course_recap.md lines 311-313: 'Per the extraction manifests this removed 3,696 watermark-only lines and 112 footers across the four decks.' Reconciles exactly with evidence/logs/extract-pdf.log: 'watermark fragments:1122 lines removed' (L1), '924' (L2), '726' (L3), '924' (L4) = 3,696; 'footers dropped: 34' + '28' + '22' + '28' = 112. The same totals appear in the four manifests' cleaning blocks (watermarkLines 1122/924/726/924; footerDropped 34/28/22/28). The string '850' survives in output/course_recap.md only inside section 9 row 1, where it is quoted as the superseded finding."
+    },
+    {
+      "id": 2,
+      "section": "Pass 1",
+      "claimed_action": "File now exists",
+      "verdict": "confirmed",
+      "evidence": "output/course_recap.md line 405 cites 'Review file: output/course_recap_review.json' and the file exists on disk, carrying overall_status 'NEEDS_REVISION' with 5 blocking and 11 advisory. The prior defect - a cited artefact that did not exist - is cured."
+    },
+    {
+      "id": 3,
+      "section": "Pass 1",
+      "claimed_action": "Reworded: heading quoted exactly, RAG attributed to the slide body",
+      "verdict": "confirmed",
+      "evidence": "output/course_recap.md lines 36-38: 'Lecture 4's slide 27 reads Up next: Day 4, its body adding that tomorrow covers making sure the answer is right using retrieval-augmented generation (RAG).' extracted/AAPLecture4_Inference_Basics/slide-27.md reads 'Up next: Day 4' then 'Today was about how fast an answer comes back. Tomorrow: how to make sure the answer is actually right, using retrieval-augmented generation (RAG).' The wording now separates heading from body exactly as claimed. Separately noted: the source's own day-number conflict (slide 1 'DAY 4 - ASTRA - ONLINE SESSION' versus slide 27 'Up next: Day 4') is still not recorded in section 8's anomaly list, which pass 1 also asked for; that part was not claimed in section 9 row 3 and so is not counted against it."
+    },
+    {
+      "id": 4,
+      "section": "Pass 1",
+      "claimed_action": "Corrected: the caption is recoverable, only the five ideas are not",
+      "verdict": "confirmed",
+      "evidence": "output/course_recap.md lines 366-368: 'Their captions are recoverable - L1 slide 32 and L2 slide 27 both read exactly Recap / Five ideas, one answer. - but the five recap ideas themselves live in the slide graphics and are not in the text layer, so they are not listed as revision points here.' extracted/AAPLecture1_LLM_Foundations/slide-32.md and extracted/AAPLecture2_Prompt_Engineering/slide-27.md both carry 'RECAP' / 'Recap' / 'Five ideas, one answer.' The claim is now scoped to the five ideas, so section 7 line 286 listing the caption as a revision point no longer contradicts section 8."
+    },
+    {
+      "id": 5,
+      "section": "Pass 1",
+      "claimed_action": "Corrected to slide 20",
+      "verdict": "confirmed",
+      "evidence": "output/course_recap.md lines 272-273: 'Slides 8, 9, 14, 18 and 20 carry interactive or graphical material whose contents are not in the text layer'. extracted/AAPLecture3_AI_Coding_Techniques/ has 22 slides (manifest.json totalSlides 22, files slide-01.md through slide-22.md), so slide 20 exists and no out-of-range 'slide 24' remains in the body. The in-scope slide number is correct; the word 'interactive' is a separate, previously-raised characterisation and is recorded in Notes rather than re-listed."
+    },
+    {
+      "id": 6,
+      "section": "Pass 1",
+      "claimed_action": "Added: Types of models (L1 s12), Why long chats forget (L1 s16), Mock version history (L2 s24)",
+      "verdict": "confirmed",
+      "evidence": "All three now appear in section 4: line 113 'Types of models - pick the right kind for the job (slide 12)' (slide 12 title 'Types of models', caption 'Pick the right kind for the job.'); line 117 'Why long chats forget - the slide where the deck states its hook is answered (16)' (slide 16 caption 'The hook, answered.'); lines 153-154 'Mock version history - one prompt, three versions (slide 24); the three versions themselves were carried by the slide's graphics and are not in the text layer' (slide 24 reads 'Mock version history' / 'One prompt, three versions.'). Each is a key_concept in its concepts record and each is now covered in section 4."
+    },
+    {
+      "id": 7,
+      "section": "Pass 1",
+      "claimed_action": "Relabelled as this recap's framing, not a deck's",
+      "verdict": "confirmed",
+      "evidence": "output/course_recap.md lines 21-23: 'The thread connecting the four decks, in this recap's reading rather than any deck's stated claim, is that a model is a mechanism, not an oracle.' The sentence now explicitly attributes the framing to the recap, so it no longer reads as a source claim."
+    },
+    {
+      "id": 8,
+      "section": "Pass 1",
+      "claimed_action": "Rebuilt byte-level; replaced with the per-deck table in section 8",
+      "verdict": "confirmed",
+      "evidence": "output/course_recap.md lines 320-329 give eight rows. A byte-level private-use scan of all 112 slide files returns exactly: L1 U+E007 on slides 15, 18, 22 and U+E009 on 17; L2 U+E007 on 16 and U+E009 on 4, 21; L3 U+E007 and U+E009 both on 11, U+E007 on 18; L4 U+E009 on 2, 11, 17, 24, 26, 28 and U+E007 on 18, 23, 26. Every row matches, including the L1 slide 17 reclassification to U+E009 and the L3 dual-glyph slide. All eight damage strings were also re-verified: seven are correct; the eighth (one pa<U+E007>ern) is wrong and is reported separately as a new blocking finding introduced by correction #13, not as a failure of this row, whose subject is the slide/codepoint table."
+    },
+    {
+      "id": 9,
+      "section": "Pass 1",
+      "claimed_action": "Retitled and quoted their actual content",
+      "verdict": "confirmed",
+      "evidence": "output/course_recap.md lines 370-373 retitle the block 'Text-bearing but not instructional' and quote the content: 'L1 slide 33 (Kahoot quiz: Quiz Time! / Four options, one answer. / kahoot.com)' matches extracted/AAPLecture1_LLM_Foundations/slide-33.md exactly, and 'L4 slide 28 (appendix source list)' matches slide-28.md's 'Sources and further reading' with seven entries. The false 'Not read at all' characterisation is gone."
+    },
+    {
+      "id": 10,
+      "section": "Pass 2",
+      "claimed_action": "Removed. Both verdicts now stated as returned, no self-certification",
+      "verdict": "confirmed",
+      "evidence": "The header block (lines 8-10) now reads 'Reviewer: pass 1 NEEDS_REVISION -> 14 corrections applied across 2 passes (section 9)' - no second-pass verdict is asserted. Section 9 lines 387-389 read 'Two review passes ran; both returned NEEDS_REVISION, and the corrections from each were applied. This document does not certify its own verdict - the authoritative verdicts are the review files themselves.' A search of output/course_recap.md finds no 'Second review: PASS' string; that string survives only at evidence/review/course_recap.revised.md line 389, the pass-2 input draft. Both pass headings state the returned verdict, NEEDS_REVISION."
+    },
+    {
+      "id": 11,
+      "section": "Pass 2",
+      "claimed_action": "Corrected; pass 2 cited to its own file",
+      "verdict": "confirmed",
+      "evidence": "output/course_recap.md line 405: 'Review file: output/course_recap_review.json' and line 418: 'Review file: output/course_recap_review_pass2.json'. Each verdict is now attributed to its own file and the former claim that one file holds 'both verdicts' is gone. This also retires the pass-2 sub-point about section 9 row 2's action text: it is now simply 'File now exists' rather than 'Both cited files now exist; reference kept'."
+    },
+    {
+      "id": 12,
+      "section": "Pass 2",
+      "claimed_action": "Table rebuilt byte-level; L4 U+E009 = 2, 11, 17, 24, 26, 28 and U+E007 = 18, 23, 26",
+      "verdict": "confirmed",
+      "evidence": "output/course_recap.md lines 328-329: '| L4 - Inference Basics | 2, 11, 17, 24, 26, 28 | U+E009 |' and '| L4 - Inference Basics | 18, 23, 26 | U+E007 |'. A byte-level scan confirms U+E009 on extracted/AAPLecture4_Inference_Basics/slide-02.md ('why it ma<U>E009ers once real users arrive'), slide-11.md ('A<U>E009ention needs the keys'), slide-17.md ('be<U>E009er'), slide-24.md ('PagedA<U>E009ention', twice), slide-26.md ('ma<U>E009ers') and slide-28.md ('PagedA<U>E009ention'); U+E007 on slide-18.md ('trade-o<U>E007', 'a<U>E007ord', twice), slide-23.md ('a<U>E007ected') and slide-26.md ('trade-o<U>E007s'). Slide 2 is now filed under U+E009, slides 2 and 26 are in the U+E009 row, and the dual-glyph slide 26 appears in both rows; the two L4 rows are disjoint on slide numbers. Internal consistency of the whole eight-row table with the damage list is confirmed apart from the L3 slide 11 string codepoint, reported separately."
+    },
+    {
+      "id": 13,
+      "section": "Pass 2",
+      "claimed_action": "The claim is now scoped honestly and the three exceptions are listed and flagged inline",
+      "verdict": "partially_confirmed",
+      "evidence": "Correct in substance: a new 'Where this recap does not preserve that discipline' block lists the three exceptions, each is flagged at its section 4 site (lines 119-121, 124-125, 165-166), and section 4 L1 slide 22 no longer spells the word out - it reads 'the source's wording for how input and output relate is damaged in the text layer'. Five defects remain. (1) The exception's damage string for L3 slide 11 gives the wrong codepoint: 'one pa<U+E007>ern' where extracted/AAPLecture3_AI_Coding_Techniques/slide-11.md and the L3 concepts record both read U+E009. (2) The exception list is stale for L1 slide 22, which it presents as a place where the discipline is not preserved, but current section 4 no longer reconstructs that word. (3) Section 4 L3 slide 11 reconstructs a second damaged word on the same slide silently - 'same architecture, different surface' against the source 'Same architecture, di<U>E007erent surface' - while flagging only 'pattern'. (4) Section 3's Lecture 2 Part 1 row ('Why structure matters'), section 4's Lecture 4 slide 18 entry ('a trade-off, not a ranking') and section 5's case-study row 3 ('were affected') each silently reconstruct a damaged word, none of which is among the three listed exceptions. (5) The categorical guarantee at line 317 - 'These were quoted verbatim and never reconstructed' - is left unsoftened where it is made, with the scoping supplied only twenty lines later, and the closing line 347 'Every other unmapped glyph in this corpus is reproduced verbatim' is false at the four sites above."
+    },
+    {
+      "id": 14,
+      "section": "Pass 2",
+      "claimed_action": "Repointed to output/concepts/AAPLecture3_AI_Coding_Techniques.concepts.json -> unavailable_content",
+      "verdict": "partially_confirmed",
+      "evidence": "The false attribution is gone: the former sentence 'Those claims rest on the extraction manifest' no longer appears in output/course_recap.md, and no residual claim in the document leans on the L3 manifest - a search finds 'extraction manifest' only at line 311 (watermark totals, which are correct) and line 444 (the section 10 appendix pointer). The remaining half of the correction is incomplete: the substantive section 8 claim at lines 349-351 ('21 of its 22 slides have a raster diagram, table or card grid whose text is not in the text layer') names no artefact, and section 9's residual-limitations bullet at line 431 now names none either, having dropped the wrong pointer without gaining the right one. The concepts file and field survive only in section 9 row 14's action column (line 416) and in section 10's generic directory path 'output/concepts/<deck>.concepts.json' (line 446). A reader arriving at section 8 has no pointer to the artefact carrying the 21 declarations; extracted/AAPLecture3_AI_Coding_Techniques/manifest.json still reads unavailableSlides: [], while output/concepts/AAPLecture3_AI_Coding_Techniques.concepts.json declares unavailable_content for slides 2-22."
+    }
+  ],
+  "new_findings_note": "Per the scope of this pass, no item already applied in section 9 rows #1-#14 is re-litigated or re-listed as a finding; a correction verified as correct is closed. Nine genuinely new findings are emitted, of which 1 is blocking: (a) one wrong private-use codepoint in the L3 slide 11 damage string, introduced by correction #13 itself and present in neither earlier draft, so it is a regression; (b) one absolute verbatim-guarantee sentence contradicted at four unflagged sites; (c) seven internal-consistency or organization defects - section 1's 'Lecture 6' label, the section 3 Lecture 4 Part 2 double-claim, the section 3 Lecture 2 Part 4/Part 5 topic under-count, the section 9 Pass 1 scope problem, the section 9 'Verification practice' count, and two diagram label/structure defects. The section 9 Pass 1 heading question was checked explicitly and lands OPEN, not resolved. Pre-existing defects that both earlier passes already recorded and that were never among the fourteen corrections - section 6's 'interactive' characterisation of L3 slides 8, 9, 14, 18 and 20, and section 8's unsupported watermark detection threshold - were not re-emitted and are listed in Notes instead."
+}
